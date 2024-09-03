@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flashcard</title>
+    <link rel="stylesheet" href="/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/css/show.css" type="text/css" />
+  </head>
+  <body>
+    <%- include('../partials/navbar') %>
+    <section id="flashcard-show">
+      <h1><%= flashcard.name %></h1>
+        <div class="flashcard-info">
+          <div class="flashcard-description">
+            <p><%= flashcard.description %></p>
+          </div>
+          <div class="flashcard-options">
+            <button class="button-30">Edit</button>
+            <!-- <form action="/flashcards/<%=flashcard._id%>/?_method=DELETE" method="POST">
+              <button class="button-warning" id="delete">Delete</button>
+            </form> -->
+            <button class="button-warning delete-button" onclick="deleteFlashcardBtn()">Delete</button>
+            <div class="delete-warning" id="deleteWarning">
+              <p>Are you sure you want to delete this flashcard?</p>
+              <div class="options">
+                <form action="/flashcards/<%=flashcard._id%>/?_method=DELETE" method="POST">
+                  <button class="button-30" id="delete">Delete</button>
+                </form>
+                <button class="cancel-delete button-30" onclick="cancelDelete()">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      <div class="flashcard-main">
+        <div class="cards-display">
+          <p>Not studied: <%= flashcard.cards.length %></p>
+          <ul>
+            <% for(let card of flashcard.cards) { %>
+              <li>
+                <div class="card">
+                  <p class="term"><%= card.term %></p>
+                  <p class="definition"><%= card.definition %></p>
+                </div>
+              </li>
+              <% } %>
+          </ul>
+        </div>
+        <div class="flashcard-showcase"></div>
+      </div>      
+    </section>
+    <script src="/js/script.js"></script>
+  </body>
+</html>

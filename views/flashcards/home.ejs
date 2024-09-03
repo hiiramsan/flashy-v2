@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/css/card-backgrounds.css" type="text/css" />
+
+  </head>
+  <body>
+    <div class="content-wrapper">
+      <%- include('../partials/navbar') %>
+      <section id="flashcards">
+        <% if(flashcards.length === 0) { %> 
+          <div class="no-sets-container">
+            <img src="/img/up-arrow.png" alt="">
+            <h1>Create your first set!</h1>
+          </div>
+          <% } %>
+        <!-- <div class="flashcard-section" id="recents">
+          <h1>Recents</h1>
+          <ul class="cards">
+            <li>
+              <a href="">
+                <div class="card-content">
+                  <div class="card-info">
+                    <h3>Italian verbs</h3>
+                    <p>34 cards</p>
+                  </div>
+                  <div class="card-creator">
+                    <img src="/img/mypfp.jpeg" alt="user-pfp" />
+                    <p>Carlos S.</p>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div> -->
+        <div class="flashcard-section" id="all-flashcards">
+          <h1>All flashcards</h1>  
+          <ul class="cards">
+            <% for(let flashcard of flashcards) { %>
+              <li>
+                <a href="/flashcards/<%=flashcard._id%>">
+                  <div class="card-content <%= flashcard.background %>">
+                    <div class="card-info">
+                      <h3><%= flashcard.name %></h3>
+                      <p> <%= flashcard.cardCount %> cards</p>
+                    </div>
+                    <div class="card-creator">
+                      <!-- <img src="/img/mypfp.jpeg" alt="user-pfp" /> -->
+                       <div class="circle-pfp"> <%= flashcard.author.username[0] %></div>
+                      <p><%= flashcard.author.username %></p>
+                    </div>
+                  </div>
+                </a>
+              </li>
+            <% } %>
+            <a href="/flashcards/create">
+              <div class="new-card-btn">
+                +
+              </div>
+            </a>
+          </ul>
+        </div>
+      </section>
+      <%- include('../partials/waves') %>
+    </div>
+   
+    <script src="js/script.js"></script>
+    <script src="/js/activePage.js" defer></script>
+  </body>
+</html>
+

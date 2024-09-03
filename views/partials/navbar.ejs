@@ -1,0 +1,53 @@
+<header>
+    <!-- Main Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="/"><img src="/img/flashy-white.svg" alt="" /></a>
+        </div>
+        <div class="links">
+            <% if(currentUser) { %>
+            <a href="/flashcards" class="nav-link">My flashcards</a>
+            <a href="/flashcards/create" class="nav-link">Create</a>
+            <a href="/flashcards/explore" class="nav-link">Explore</a>
+            <% } %>
+        </div>
+        <div class="user-info">
+            <% if(!currentUser) { %>
+            <a href="/login" class="nav-link">Login</a>
+            <a href="/register" class="nav-link">Register</a>
+            <% } else { %>
+            <!-- <a href="/logout" class="nav-link">Logout</a> -->
+            <div class="image-container">
+                <!-- <img src="/img/mypfp.jpeg" alt="user-pfp"> -->
+                <div class="middle-circle"><%= currentUser.username[0] %></div>
+            </div>
+            <% } %>
+        </div>
+    </nav>
+    <% if(currentUser) { %>
+    <div class="dropdown__wrapper hide dropdown__wrapper--fade-in none">
+        <div class="dropdown__group">
+            <div class="user-name"><%= currentUser.username %></div>
+            <div class="email"> <%= currentUser.email %></div>
+        </div>
+        <nav>
+            <ul>
+                <li>
+                    <img src="/img/profile.svg" alt="Profile"> My Profile
+                </li>
+                <li>
+                    <img src="/img/settings.svg" alt="Settings"> Settings
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <img src="/img/tutorials.svg" alt="Tutorials"> Tutorials
+                </li>
+                <li style="color: #E3452F; font-weight: bold;">
+                    <img src="/img/logout.svg" alt="Log Out"> <a href="/logout">Log out</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <% } %>
+</header>

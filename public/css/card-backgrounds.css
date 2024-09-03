@@ -1,0 +1,68 @@
+.bg-pt-1 {
+  background-size: 100% 100%;
+  background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
+  background-image: repeating-linear-gradient(
+      315deg,
+      #00ffff2e 92%,
+      #073aff00 100%
+    ),
+    repeating-radial-gradient(
+      75% 75% at 238% 218%,
+      #00ffff12 30%,
+      #073aff14 39%
+    ),
+    radial-gradient(99% 99% at 109% 2%, #00c9ffff 0%, #073aff00 100%),
+    radial-gradient(99% 99% at 21% 78%, #7b00ffff 0%, #073aff00 100%),
+    radial-gradient(160% 154% at 711px -303px, #2000ffff 0%, #073affff 100%);
+}
+
+.bg-pt-2 {
+  background-image: radial-gradient(circle at center center, #bebf36, #33c05b),
+    repeating-radial-gradient(
+      circle at center center,
+      #bebf36,
+      #bebf36,
+      21px,
+      transparent 42px,
+      transparent 21px
+    );
+  background-blend-mode: multiply;
+  background-color: #33c05b;
+}
+
+.bg-pt-3 {
+    background: #474bff;
+    background: -webkit-linear-gradient(0deg, #474bff 0%, #bc48ff 100%);
+    background: linear-gradient(0deg, #474bff 0%, #bc48ff 100%);
+
+}
+
+.bg-pt-4 {
+    background:
+      conic-gradient(from -60deg at 50% calc(100%/3),#c41f12 0 120deg,#0000 0),
+      conic-gradient(from 120deg at 50% calc(200%/3),#c41f12 0 120deg,#0000 0),
+      conic-gradient(from  60deg at calc(200%/3),#c41f12 60deg,#ef594d 0 120deg,#0000 0),
+      conic-gradient(from 180deg at calc(100%/3),#f7b0ab 60deg,#c41f12 0 120deg,#0000 0),
+      linear-gradient(90deg,#f7b0ab calc(100%/6),#ef594d 0 50%,
+      #f7b0ab 0 calc(500%/6), #ef594d 0);
+background-size: 111px 64px;
+
+}
+
+.bg-pt-5 {
+    background: #3de164;
+    background: -webkit-linear-gradient(0deg, #3de164 0%, #6b3d6a 100%);
+    background: linear-gradient(0deg, #3de164 0%, #6b3d6a 100%);
+}
+
+.bg-pt-6 {
+    background: linear-gradient(135deg, #7c62f9 25%, transparent 25%) -32px 0/ 64px 64px, linear-gradient(225deg, rgba(124,98,249,0.5) 25%, transparent 25%) -32px 0/ 64px 64px, linear-gradient(315deg, #7c62f9 25%, transparent 25%) 0 0/ 64px 64px, linear-gradient(45deg, rgba(124,98,249,0.5) 25%, #5a39a1 25%) 0 0/ 64px 64px;
+    background-color: #5a39a1;
+
+}
+
+.bg-pt-7 {
+    background-image: radial-gradient(circle at center center, #474bff, #47d3ff), repeating-radial-gradient(circle at center center, #474bff, #474bff, 32px, transparent 64px, transparent 32px);
+background-blend-mode: multiply;
+background-color: #47d3ff;
+}
