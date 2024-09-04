@@ -72,7 +72,7 @@ app.get('/', (req, res) => {
 
 //routers
 app.use("/flashcards", flashcardsRoutes);
-app.use("/", usersRoutes);
+app.use("/", usersRoutes);  
 
 app.all('*', (req, res, next)=>{
   next(new ExpressError('Page Not Found', 404))

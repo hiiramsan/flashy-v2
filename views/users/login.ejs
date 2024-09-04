@@ -30,23 +30,15 @@
                     <h1>Welcome back! &#128079;</h1>
                     <h2>Login with your account!</h2>
                 </div>
-               <!--  <div class="socials-row">
-                    <a href="#" title="Use Apple">
-                        <img src="/img/apple.png" alt="Apple">
-                        Continue with Apple
-                    </a>
-                </div>
-                <div class="socials-row">
-                    <a href="#" title="Use Github">
-                        <img src="/img/google.png" alt="Google">
-                        Continue with Google
-                    </a>
-                </div>
-                <div class="divider">
-                    <div class="divider-line"></div>
-                    or
-                    <div class="divider-line"></div>
-                </div> -->
+        
+                <!-- Err container: si la contra o usuario es incorrecto -->
+                <% if (error && error.length > 0) { %>
+                    <div class="error-container">
+                      <div class="alert alert-danger"><%= error %> 😢</div>
+                    </div>
+                  <% } %>
+  
+        
                 <div class="text-field">
                     <label for="username">Username</label>
                     <input 
@@ -74,6 +66,7 @@
                 </div>
             </form>
         </main>
+        
     </div>
 
     
