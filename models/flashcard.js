@@ -18,7 +18,7 @@ const FlashcardSchema = new Schema({
             ref: 'Card'
         }
     ],
-    isVisible: {type:Boolean,default:false}
+    isVisible: { type: Boolean, default: true }
 
 }, opts);
 

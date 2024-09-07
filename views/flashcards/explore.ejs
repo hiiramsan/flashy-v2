@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Flashcards</title>
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+<body>
+    <%- include('../partials/navbar') %>
+        <section id="flashcard-explore">
+            <h1>Explore Flashcards</h1>
+            <ul>
+                <% flashcards.forEach(flashcard=> { %>
+                    <li>
+                        <a href="/flashcards/<%= flashcard._id %>">
+                            <div class="flashcard-item">
+                                <h2>
+                                    <%= flashcard.name %>
+                                </h2>
+                                <div class="author-info">
+                                    <div class="circle-pfp">
+                                        <%= flashcard.author.username[0] %>
+                                    </div>
+                                    <p>
+                                        <%= flashcard.author.username %>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <% }) %>
+                        <a href="/flashcards/create">
+                            <div class="new-card-btn">+</div>
+                        </a>
+            </ul>
+        </section>
+        <%- include('../partials/waves') %>
+            <script src="/js/script.js"></script>
+</body>
+
+</html>
