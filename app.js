@@ -17,12 +17,12 @@ const Card = require('./models/card');
 
 // connection to database
 mongoose.connect('mongodb://127.0.0.1:27017/flashy-demo')
-.then(() => {
-  console.log('Connected to MongoDB');
-})
-.catch((err) => {
-  console.log('Error connecting to MongoDB', err);
-});
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch((err) => {
+    console.log('Error connecting to MongoDB', err);
+  });
 
 const app = express();
 
@@ -40,9 +40,9 @@ const sessionConfig = {
   resave: false,
   saveUninitialized: true,
   cookie: {
-      httpOnly: true,
-      expires: Date.now() + (1000 * 60 * 60 * 24 * 7),
-      maxAge:  (1000 * 60 * 60 * 24 * 7)
+    httpOnly: true,
+    expires: Date.now() + (1000 * 60 * 60 * 24 * 7),
+    maxAge: (1000 * 60 * 60 * 24 * 7)
   }
 }
 
@@ -64,6 +64,10 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get('/dick', (req, res) => {
+  res.send('Holiwis');
+});
+
 
 app.get('/', (req, res) => {
   res.render('home')
@@ -72,19 +76,19 @@ app.get('/', (req, res) => {
 
 //routers
 app.use("/flashcards", flashcardsRoutes);
-app.use("/", usersRoutes);  
+app.use("/", usersRoutes);
 
-app.all('*', (req, res, next)=>{
+app.all('*', (req, res, next) => {
   next(new ExpressError('Page Not Found', 404))
 })
 
 // middleware
-app.use((err, req, res, next) =>{
+app.use((err, req, res, next) => {
   const { statusCode = 500 } = err;
-  if(!err.message) err.message = "Something went wrong!"
-  res.status(statusCode).render('error', {err})
+  if (!err.message) err.message = "Something went wrong!"
+  res.status(statusCode).render('error', { err })
 })
 
-app.listen(3000, ()=> {
-    console.log('Server is running on port 3000');
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
 });

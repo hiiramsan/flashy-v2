@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const Card = require('./card');
 
-const opts = { toJSON: { virtuals: true }}
+const opts = { toJSON: { virtuals: true } }
 
 const FlashcardSchema = new Schema({
     name: { type: String, required: true },
@@ -17,15 +17,16 @@ const FlashcardSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'Card'
         }
-    ]
+    ],
+
 }, opts);
 
-FlashcardSchema.virtual('cardCount').get(function() {
+FlashcardSchema.virtual('cardCount').get(function () {
     return this.cards.length;
 });
 
-FlashcardSchema.post('findOneAndDelete', async function(doc){
-    if(doc) {
+FlashcardSchema.post('findOneAndDelete', async function (doc) {
+    if (doc) {
         await Card.deleteMany({
             _id: {
                 $in: doc.cards
