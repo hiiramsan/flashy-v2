@@ -76,19 +76,17 @@ module.exports.deleteFlashcard = async (req, res) => {
 //the attribute "isVisible" set to true
 module.exports.explore = async (req, res) => {
   try {
-    console.log('Entrando');
+
     // Busca las flashcards con el atributo isVisible establecido en true
     const flashcards = await Flashcard.find({ isVisible: true })
       .populate("author");
-    console.log('Busca');
 
     // Si no se encuentran flashcards, muestra un mensaje de información
     if (flashcards.length === 0) {
       req.flash('info', 'No visible flashcards found');
       return res.redirect('/flashcards');
-      console.log('No encuentra');
     }
-    console.log('Sale');
+
     // Renderiza la vista con las flashcards encontradas
     res.render('flashcards/explore', { flashcards });
 
