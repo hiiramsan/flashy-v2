@@ -26,9 +26,17 @@ module.exports.create = async (req, res, next) => {
       const msg = error.details.map(el => el.message).join(',');
       throw new ExpressError(msg, 400);
     }
+
+    let isVisible = false;
+    console.log(req.body.visibility);
+    if(req.body.visibility === "true") {
+      isVisible = true;
+    }
+
     const flashcard = new Flashcard({
       name: req.body.name,
       description: req.body.description,
+      isVisible: isVisible,
       background: req.body.background,
       author: req.user._id
     });
@@ -75,35 +83,22 @@ module.exports.deleteFlashcard = async (req, res) => {
   res.redirect('/flashcards')
 }
 
-//Seraches for all the Flashcards(Decks) that have
-//the attribute "isVisible" set to true
 module.exports.explore = async (req, res) => {
   try {
-
-    //Serches the flashcard with the attribute "isVisible" set to true
     const flashcards = await Flashcard.find({ isVisible: true })
       .populate("author");
-
-    //Seraches for all the Flashcards(Decks) that have
-    //the attribute "isVisible" set to true
-    module.exports.explore = async (req, res) => {
-      try {
-      //Serches the flashcard with the attribute "isVisible" set to true
-    const flashcards = await Flashcard.find({ isVisible: true })
-      .populate("author");
-    
-    // If no flashcards are found will send message
+  
     if (flashcards.length === 0) {
       req.flash('info', 'No visible flashcards found');
       return res.redirect('/flashcards');
     }
 
-    // Renders found flashcards
     res.render('flashcards/explore', { flashcards });
 
   } catch (error) {
     console.error(error);
     req.flash("error", "Something went wrong");
     res.redirect("/flashcards");
+    console.log("Error in explore");
   }
-}
+};

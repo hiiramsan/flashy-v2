@@ -26,8 +26,9 @@ const extension = (joi) => ({
 const Joi = BaseJoi.extend(extension);
 module.exports.flashcardSchema = Joi.object({
     name: Joi.string().required().escapeHTML(),
-    description: Joi.string().optional().escapeHTML(),
     background: Joi.string().optional().escapeHTML(),
+    description: Joi.string().optional().escapeHTML(),
+    visibility: Joi.boolean().optional(),
     cards: Joi.array().items(
         Joi.object({
             term: Joi.string().required().escapeHTML(),

@@ -64,6 +64,7 @@
             </div>
           </div>
         </div>
+      </div>
         <div class="field">
           <label for="cards" id="cardsLabel">Create at least 3 cards</label>
           <div id="cards-container">
@@ -131,12 +132,22 @@
               ></i>
             </div>
           </div>
-          
         </div>
 
-        <button type="button" class="button-3" onclick="addCard()">
-          Add card
-        </button>
+        
+        <button type="button" class="button-3" onclick="addCard()">Add card</button>
+
+        <div class="field" id="visibility">
+          <label for="visibility">Make this set public?</label>
+          <div class="checkbox-wrapper-63">
+            <label class="switch">
+              <input type="checkbox" id="visibility" name="visibility" value="true"> 
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+        
+
         <button class="button-30" role="button">Create set</button>
         <div class="error-message" id="error-message">
           <i class="fas fa-exclamation-circle"></i>
