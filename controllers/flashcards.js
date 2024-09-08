@@ -1,5 +1,7 @@
 const Flashcard = require("../models/flashcard.js");
 const Card = require("../models/card.js");
+const { flashcardSchema } = require("../validateSchemas.js"); 
+const ExpressError = require("../utils/ExpressError.js");
 
 module.exports.index = async (req, res) => {
   const flashcards = await Flashcard.find({ author: req.user._id })
@@ -17,13 +19,12 @@ module.exports.index = async (req, res) => {
 };
 
 module.exports.create = async (req, res, next) => {
-  /* const flashcard = new Flashcard(req.body.flashcard);
-  flashcard.author = req.user._id;
-  await flashcard.save();
-  console.log(flashcard);
-  req.flash('sucess', "New set created!");
-  res.redirect(`/flashcards/${flashcard._id}`); */
   try {
+    const { error } = flashcardSchema.validate(req.body);
+    if(error) {
+      const msg = error.details.map(el => el.message).join(',');
+      throw new ExpressError(msg, 400);
+    }
     const flashcard = new Flashcard({
       name: req.body.name,
       description: req.body.description,
@@ -36,11 +37,14 @@ module.exports.create = async (req, res, next) => {
     const cards = await Card.insertMany(cardData);
     flashcard.cards = cards.map(card => card._id);
     await flashcard.save();
+
+    req.flash('success', "Flashcard deck created successfully!")
     res.redirect(`/flashcards/${flashcard._id}`);
   } catch(error) { 
-      console.error(error);
-      res.redirect('/flashcards/create')
+
+      next(error);
   }
+  
 };
 
 module.exports.renderCreate = (req, res) => {
@@ -69,8 +73,6 @@ module.exports.deleteFlashcard = async (req, res) => {
   await Flashcard.findByIdAndDelete(id);
   res.redirect('/flashcards')
 }
-
-
 
 module.exports.explore = (req, res) => {
     res.send('AUN NO ESTA')

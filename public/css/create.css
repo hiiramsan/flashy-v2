@@ -1,0 +1,257 @@
+section#create-set {
+    font-family: "Montserrat", sans-serif;
+    padding: 130px 100px;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    flex-direction: row;
+    margin-bottom: 20px;
+    position: relative; 
+  }
+
+  .form-row#name {
+    flex-direction: column;
+  }
+
+  
+  .field {
+    flex: 1;
+    margin-right: 20px;
+  }
+  
+  .right-fields {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 20px;
+  }
+  
+  section#create-set > h1 {
+    color: white;
+  }
+  
+  section#create-set > form {
+    background: rgba(255, 255, 255, 0.3);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: inline-flex;
+    flex-direction: column;
+    border-radius: 8px;
+    padding: 30px;
+    margin: 50px;
+    width: 80%;
+    gap: 20px;
+    color: var(--secondary-opt-2);
+  }
+  
+  section#create-set ::placeholder {
+    color: var(--dark-gray);
+  }
+  
+  section#create-set > form > .field {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  section#create-set input {
+    background: 0;
+    border: 0;
+    outline: 0;
+    font-size: 1em;
+    color: black;
+    transition: padding 0.3s 0.2s ease;
+    width: 100%;
+  }
+  
+  section#create-set input:focus {
+    padding-bottom: 5px;
+  }
+  
+  section#create-set input:focus + .line:after {
+    transform: scaleX(1);
+  }
+  
+  section#create-set .name-field {
+    background: 0;
+    border: 0;
+    margin-bottom: 10px;
+    outline: none;
+    font-size: 1.4em;
+    font-weight: 900;
+    transition: padding 0.3s 0.2s ease;
+    position: relative;
+    width: 100%;
+  }
+  
+  section#create-set .name-field:focus {
+    padding-bottom: 5px;
+  }
+  
+  section#create-set .name-field:focus + .line:after {
+    transform: scaleX(1);
+  }
+  
+  section#create-set .name-field .line {
+    width: 100%;
+    height: 3px;
+    position: absolute;
+    bottom: -8px;
+    background: transparent;
+  }
+  
+  section#create-set .name-field .line:after {
+    content: " ";
+    position: absolute;
+    float: right;
+    width: 100%;
+    height: 3px;
+    transform: scalex(0);
+    transition: transform 0.3s ease;
+    background: var(--secondary-opt-2);
+  }
+  
+  .name-field input {
+    font-family: "Montserrat";
+    font-weight: 700;
+    color: white;
+  }
+  
+  section#create-set textarea {
+    background: 0;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 1em;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid var(--dark-gray);
+    border-radius: 4px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  textarea#description {
+    height: 80px;
+    resize: none;
+  }
+  
+  section#create-set textarea:focus {
+    border: 2px solid var(--secondary-opt-2);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    outline: 0;
+  }
+  
+  section#create-set label {
+    color: var(--secondary-opt-2);
+  }
+  
+  section#create-set textarea:focus + label {
+    color: var(--secondary-opt-2);
+  }
+  
+  .field .background-options {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .background-option {
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid messi;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .background-option.selected {
+    border: 2px solid #000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  .background-option:hover {
+    border: 2px solid #000;
+  }
+  
+  section#create-set .card {
+    font-family: "Montserrat";
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 30px 50px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    margin: 20px 0px 0px 0px;
+    gap: 30px;
+  }
+  
+  .card-number {
+    flex-shrink: 0;
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  
+  .card-inputs {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    gap: 20px;
+  }
+  
+  .card textarea {
+    height: 40px;
+    width: 100%;
+    background: 0;
+    border: 0;
+    outline: 0;
+    font-size: 1em;
+    color: black;
+    transition: padding 0.3s 0.2s ease;
+    resize: none;
+    overflow: hidden;
+    line-height: 1.2em;
+  }
+  
+  .card textarea:focus {
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--secondary-opt-2);
+  }
+  
+  .remove-card {
+    color: #ef2d56;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    font-size: 1.2em;
+    line-height: 1;
+  }
+  
+  .remove-card:hover {
+    color: #ff6666;
+  }
+  
+  .error-message {
+    display: none;
+    align-items: center;
+    color: #ef2d56;
+    margin-top: 10px; 
+    font-size: 1em;
+    bottom: -25px; 
+    left: 0;
+  }
+  
+  .error-message i {
+    margin-right: 5px; 
+  }
+  
