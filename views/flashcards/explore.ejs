@@ -9,36 +9,42 @@
 </head>
 
 <body>
-    <%- include('../partials/navbar') %>
-        <section id="flashcard-explore">
-            <h1>Explore Flashcards</h1>
-            <ul>
-                <% flashcards.forEach(flashcard=> { %>
-                    <li>
-                        <a href="/flashcards/<%= flashcard._id %>">
-                            <div class="flashcard-item">
-                                <h2>
-                                    <%= flashcard.name %>
-                                </h2>
-                                <div class="author-info">
-                                    <div class="circle-pfp">
-                                        <%= flashcard.author.username[0] %>
+    <div class="content-wrapper">
+        <%- include('../partials/navbar') %>
+            <section id="flashcards">
+                <div class="flashcard-section" id="all-flashcards">
+                    <h1>Explore Flashcards</h1>
+                    <ul class="cards">
+                        <% flashcards.forEach(flashcard=> { %>
+                            <li>
+                                <a href="/flashcards/<%= flashcard._id %>">
+                                    <div class="card-content <%= flashcard.background %>">
+                                        <h3>
+                                            <%= flashcard.name %>
+                                        </h3>
+                                        <div class="author-info">
+                                            <div class="circle-pfp">
+                                                <%= flashcard.author.username[0] %>
+                                            </div>
+                                            <p>
+                                                <%= flashcard.author.username %>
+                                            </p>
+                                        </div>
                                     </div>
-                                    <p>
-                                        <%= flashcard.author.username %>
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <% }) %>
-                        <a href="/flashcards/create">
-                            <div class="new-card-btn">+</div>
-                        </a>
-            </ul>
-        </section>
-        <%- include('../partials/waves') %>
-            <script src="/js/script.js"></script>
+                                </a>
+                            </li>
+                            <% }) %>
+                                <a href="/flashcards/create">
+                                    <div class="new-card-btn">+</div>
+                                </a>
+                    </ul>
+                </div>
+
+            </section>
+            <%- include('../partials/waves') %>
+    </div>
+
+    <script src="/js/script.js"></script>
 </body>
 
 </html>
