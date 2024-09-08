@@ -41,8 +41,8 @@ module.exports.create = async (req, res, next) => {
     req.flash('success', "Flashcard deck created successfully!")
     res.redirect(`/flashcards/${flashcard._id}`);
   } catch(error) { 
-
-      next(error);
+      console.error(error);
+      res.redirect('/flashcards/create')
   }
   
 };
@@ -74,6 +74,27 @@ module.exports.deleteFlashcard = async (req, res) => {
   res.redirect('/flashcards')
 }
 
-module.exports.explore = (req, res) => {
-    res.send('AUN NO ESTA')
+//Seraches for all the Flashcards(Decks) that have
+//the attribute "isVisible" set to true
+module.exports.explore = async (req, res) => {
+  try {
+
+    //Serches the flashcard with the attribute "isVisible" set to true
+    const flashcards = await Flashcard.find({ isVisible: true })
+      .populate("author");
+
+    // If no flashcards are found will send message
+    if (flashcards.length === 0) {
+      req.flash('info', 'No visible flashcards found');
+      return res.redirect('/flashcards');
+    }
+
+    // Renders found flashcards
+    res.render('flashcards/explore', { flashcards });
+
+  } catch (error) {
+    console.error(error);
+    req.flash("error", "Something went wrong");
+    res.redirect("/flashcards");
+  }
 }
