@@ -27,12 +27,12 @@ const Joi = BaseJoi.extend(extension);
 module.exports.flashcardSchema = Joi.object({
     name: Joi.string().required().escapeHTML(),
     background: Joi.string().optional().escapeHTML(),
-    description: Joi.string().optional().escapeHTML(),
     visibility: Joi.boolean().optional(),
-    cards: Joi.array().items(
+    description: Joi.string().optional().allow('').escapeHTML(),
+    cards: Joi.array(/* ).items(
         Joi.object({
             term: Joi.string().required().escapeHTML(),
             definition: Joi.string().required().escapeHTML()
         })
-    ).min(3).required()
+     */).min(3).required(),
 });

@@ -61,7 +61,7 @@ function addCard(){
   <div class="card">
           <div class="card-number">${cardCount + 1}</div>
           <div class="card-inputs">
-            <textarea class="resizable-textarea" name="carsd[${cardCount}][term]" id="term" placeholder="Term"></textarea>
+            <textarea class="resizable-textarea" name="cards[${cardCount}][term]" id="term" placeholder="Term"></textarea>
             <textarea class="resizable-textarea" name="cards[${cardCount}][definition]" id="definition" placeholder="Definition"></textarea>
           </div>
           <i class="fas fa-trash remove-card" onclick="removeCard(this)"></i>
