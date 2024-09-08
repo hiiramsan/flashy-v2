@@ -104,7 +104,8 @@ function deleteFlashcardBtn() {
 document.getElementById('delete').addEventListener('click', ()=>{
   document.getElementById('deleteWarning').style.display = 'none';
 })
-
+  
 function cancelDelete() {
   document.getElementById('deleteWarning').style.display = 'none';
 }
+
