@@ -16,6 +16,9 @@ router.route('/explore')
 
 router.route('/:id')
 .get(isLoggedIn, isAuthor, catchAsync(flashcards.showFlashcard))
+.put(isLoggedIn, isAuthor, catchAsync(flashcards.updateFlashcard))
 .delete(isLoggedIn, isAuthor, catchAsync(flashcards.deleteFlashcard))
+
+router.get("/:id/edit",isLoggedIn, isAuthor, catchAsync(flashcards.renderEditForm));
 
 module.exports = router;

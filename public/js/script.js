@@ -52,7 +52,7 @@ document.querySelectorAll('.resizable-textarea').forEach(textarea => {
 
 // scripting for card creating
 
-let cardCount = 3;
+let cardCount = document.querySelectorAll('.card').length;
 
 function addCard(){
   const cardContainer = document.getElementById('cards-container');
@@ -85,8 +85,10 @@ async function removeCard(element) {
   } else {
 
     document.getElementById('cardsLabel').style = "color: red";
+    document.getElementById('cardsLabel').innerHTML = "Cannot have less than 3 cards!";
     await new Promise(resolve => setTimeout(resolve, 3000));
     document.getElementById('cardsLabel').style = "color: black";
+    document.getElementById('cardsLabel').innerHTML = "Edit your flashcard deck";
   }
   
 }

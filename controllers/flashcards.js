@@ -102,3 +102,59 @@ module.exports.explore = async (req, res) => {
     console.log("Error in explore");
   }
 };
+
+module.exports.renderEditForm = async (req, res) => {
+  const { id } = req.params;
+  const flashcard = await Flashcard.findById(id)
+  .populate('cards');
+  if(!flashcard) {
+    req.flash('error', 'Flashcard not found');
+    return res.redirect('/flashcards');
+  } 
+
+  res.render('flashcards/edit', { flashcard });
+}
+
+module.exports.updateFlashcard = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Validate the incoming data
+    const { error } = flashcardSchema.validate(req.body);
+    if (error) {
+      const msg = error.details.map((el) => el.message).join(',');
+      throw new ExpressError(msg, 400);
+    }
+
+    // Find the existing flashcard set
+    const flashcard = await Flashcard.findById(id);
+    if (!flashcard) {
+      req.flash('error', 'Flashcard not found');
+      return res.redirect('/flashcards');
+    }
+
+    // Update flashcard metadata
+    flashcard.name = req.body.name;
+    flashcard.description = req.body.description;
+    flashcard.background = req.body.background;
+    flashcard.isVisible = req.body.visibility === 'true';
+
+    // Delete old cards
+    await Card.deleteMany({ _id: { $in: flashcard.cards } });
+
+    // Add new cards
+    const cardData = req.body.cards;
+    const cards = await Card.insertMany(cardData);
+    flashcard.cards = cards.map((card) => card._id);
+
+    // Save updated flashcard set
+    await flashcard.save();
+
+    req.flash('success', 'Flashcard updated successfully');
+    res.redirect(`/flashcards/${flashcard._id}`);
+  } catch (error) {
+    console.error(error);
+    req.flash('error', 'An error occurred while updating the flashcard');
+    res.redirect(`/flashcards/${req.params.id}/edit`);
+  }
+};

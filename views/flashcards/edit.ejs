@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit set</title>
+  <link rel="stylesheet" href="/css/style.css" type="text/css" />
+  <link rel="stylesheet" href="/css/card-backgrounds.css" type="text/css" />
+  <link rel="stylesheet" href="/css/create.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="stylesheet" href="/css/components.css" type="text/css" />
+</head>
+<body>
+  <%- include('../partials/navbar') %>
+  <section id="create-set">
+    <h1>Edit your flashcard deck</h1>
+    <form action="/flashcards/<%=flashcard._id%>?_method=PUT" method="POST" id="create-form">
+      <div class="form-row" id="name">
+        <div class="name-field">
+          <label for="name"></label>
+          <input
+            type="text"
+            autocomplete="off"
+            name="name"
+            id="name-input"
+            placeholder="What's this set called?"
+            value="<%= flashcard.name %>"
+            autofocus
+          />
+          <div class="line"></div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="description"></label>
+          <textarea
+            name="description"
+            id="description"
+            placeholder="Add a description"><%= flashcard.description %></textarea>
+          <div class="line"></div>
+        </div>
+        <div class="right-fields">
+          <div class="field">
+            <label for="background">Choose a background</label>
+            <div class="background-options">
+              <input type="hidden" name="background" id="selected-background" value="bg1" />
+              <div class="background-option bg-pt-1" data-bg="bg-pt-1"></div>
+              <div class="background-option bg-pt-2" data-bg="bg-pt-2"></div>
+              <div class="background-option bg-pt-3" data-bg="bg-pt-3"></div>
+              <div class="background-option bg-pt-4" data-bg="bg-pt-4"></div>
+              <div class="background-option bg-pt-5" data-bg="bg-pt-5"></div>
+              <div class="background-option bg-pt-6" data-bg="bg-pt-6"></div>
+              <div class="background-option bg-pt-7" data-bg="bg-pt-7"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Render cards  -->
+      <div class="field">
+        <label for="cards" id="cardsLabel">Edit your cards</label>
+        <div id="cards-container">
+          <% flashcard.cards.forEach((card, index) => { %>
+            <div class="card">
+              <div class="card-number"><%= index + 1 %></div>
+              <div class="card-inputs">
+                <textarea
+                  class="resizable-textarea"
+                  name="cards[<%= index %>][term]"
+                  placeholder="Term"><%= card.term %></textarea>
+                <textarea
+                  class="resizable-textarea"
+                  name="cards[<%= index %>][definition]"
+                  placeholder="Definition"><%= card.definition %></textarea>
+              </div>
+              <i class="fas fa-trash remove-card" onclick="removeCard(this)"></i>
+            </div>
+          <% }); %>
+        </div>
+      </div>
+
+      <button type="button" class="button-3" onclick="addCard()">Add card</button>
+
+      <div class="field" id="visibility">
+        <label for="visibility">Make this set public?</label>
+        <div class="checkbox-wrapper-63">
+          <label class="switch">
+            <input type="checkbox" id="visibility" name="visibility" value="true" <%= flashcard.visibility ? 'checked' : '' %> />
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+      <div class="error-message" id="error-message">
+        <i class="fas fa-exclamation-circle"></i>
+        <span id="error-message-text"></span>
+      </div>
+      <button class="button-30" role="button">Update set</button>
+    </form>
+  </section>
+  <%- include('../partials/waves') %>
+  <script src="/js/script.js"></script>
+  <script src="/js/activePage.js" defer></script>
+  <script src="/js/validateDeck.js" defer></script>
+</body>
+</html>

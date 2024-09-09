@@ -18,7 +18,7 @@
           </div>          
           <% if(currentUser._id.equals(flashcard.author._id)) { %>
           <div class="flashcard-options">
-            <button class="button-30">Edit</button>
+              <a href="/flashcards/<%=flashcard._id%>/edit" class="button-30">Edit</a>
             <button class="button-warning delete-button" onclick="deleteFlashcardBtn()">Delete</button>
             <div class="delete-warning" id="deleteWarning">
               <p>Are you sure you want to delete this flashcard?</p>
