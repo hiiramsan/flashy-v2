@@ -252,7 +252,7 @@ section#create-set {
   }
   
   .error-message i {
-    margin-right: 5px; 
+    margin-right: 10px; 
   }
 
   .checkbox-wrapper-63 input[type="checkbox"] {
@@ -312,4 +312,19 @@ section#create-set {
     flex-direction: row;
     align-items: center;
     gap: 10px;
+  }
+
+  .validation-error {
+    border: 1px solid #ef2d56 !important;
+  }
+
+  .error-icon {
+    position: absolute;
+    right: 10px; 
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ef2d56; 
+    pointer-events: none; 
+    font-size: 1.2em; 
+
   }
