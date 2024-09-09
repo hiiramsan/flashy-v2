@@ -60,8 +60,13 @@ nameF.addEventListener('keypress', (e) => {
 });
 
 // REMOVE VALIDATION-ERROR CLASS FOR CARD TEXTAREAS ON INPUT
-document.querySelectorAll('textarea').forEach((input) => {
-    input.addEventListener('keypress', (e) => {
-        e.target.classList.remove('validation-error');
+function attachInputListeners() {
+    document.querySelectorAll('#cards-container textarea').forEach((input) => {
+        input.addEventListener('keypress', (e) => {
+            e.target.classList.remove('validation-error');
+        });
     });
-});
+}
+
+// Initial call to attach listeners to existing inputs
+attachInputListeners();

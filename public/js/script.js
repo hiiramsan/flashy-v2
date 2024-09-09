@@ -61,8 +61,8 @@ function addCard(){
   <div class="card">
           <div class="card-number">${cardCount + 1}</div>
           <div class="card-inputs">
-            <textarea class="resizable-textarea" name="cards[${cardCount}][term]" id="term" placeholder="Term"></textarea>
-            <textarea class="resizable-textarea" name="cards[${cardCount}][definition]" id="definition" placeholder="Definition"></textarea>
+            <textarea class="resizable-textarea" name="cards[${cardCount}][term]" placeholder="Term"></textarea>
+            <textarea class="resizable-textarea" name="cards[${cardCount}][definition]" placeholder="Definition"></textarea>
           </div>
           <i class="fas fa-trash remove-card" onclick="removeCard(this)"></i>
         </div>
@@ -70,7 +70,11 @@ function addCard(){
   cardContainer.insertAdjacentHTML('beforeend', cardHtml);
   cardCount++;
   fixIndexes();
+
+  // Attach validation listeners to the newly created card inputs
+  attachInputListeners();
 }
+
 
 async function removeCard(element) {
   const card = element.closest('.card');
@@ -101,9 +105,9 @@ function deleteFlashcardBtn() {
   document.getElementById('deleteWarning').style.display = "block";
 }
 
-document.getElementById('delete').addEventListener('click', ()=>{
+/* document.getElementById('delete').addEventListener('click', ()=>{
   document.getElementById('deleteWarning').style.display = 'none';
-})
+}) */
   
 function cancelDelete() {
   document.getElementById('deleteWarning').style.display = 'none';
