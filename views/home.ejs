@@ -10,14 +10,20 @@
   </head>
   <body>
     <div class="content-wrapper">
-        <%- include('./partials/navbar') %>
-        <section id="hero">
-          <h1>Make learning cool and fun. Join now!</h1>
-          <a href="/register" class="button-28" role="button">Start Now</a>
-        </section>
-        <%- include('./partials/waves') %>
-        <%- include('./partials/footer') %>
+      <%- include('./partials/navbar') %>
+      <section id="hero">
+        <div class="container hero-left">
+          <h1>Conquer any subject with the power of flashcards</h1>
+          <a href="/register" class="button-primary" role="button">Join Now</a>
+        </div>
+        <div class="container hero-right">
+          <img src="/img/colored-cards.jpg" alt="">
+        </div>
+      
+      </section>
+      <%- include('./partials/waves') %> <%- include('./partials/footer') %>
     </div>
     <script src="js/script.js"></script>
+  
   </body>
 </html>
