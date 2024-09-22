@@ -14,24 +14,32 @@ section#flashcard-show {
   gap: 10px;
 }
 
-section#flashcard-show > h1 {
-  font-size: 3em;
+.deck-info {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  
+  gap: 10px;
 }
 
-.flashcard-info {
+.deck-info > h1 {
+  font-size: 2.5em;
+}
+
+.flashcard-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
 
-.flashcard-info .flashcard-options {
+.flashcard-header .flashcard-options {
   display: flex;
   gap: 10px;
   flex-direction: row;
 }
 
-.flashcard-description p {
+.flashcard-description {
   font-size: 1.2em;
 }
 
@@ -50,12 +58,32 @@ section#flashcard-show > h1 {
   justify-content: center;
 }
 
+.deck-activities {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  gap: 20px;
+}
+
+.deck-activities a {
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.shortcuts-menu {
+  position: absolute;
+  left: 10px;
+}
+
 .carousel-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 15px;
+  margin-bottom: 40px;
 }
 
 #pIndicator {
@@ -68,21 +96,46 @@ section#flashcard-show > h1 {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
-.cards-display {
+.deck-cards {
   flex: 1;
-  margin-right: 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+
 }
 
-.cards-display ul {
+.deck-cards ul {
   list-style: none;
+
 }
 
-.cards-display p {
-  margin-bottom: 10px;
-  color: #02020a;
+.deck-cards p.deck-cards {
+  color:#fff;
+  font-weight: bold;
 }
 
-.cards-display .card {
+.deck-cards p.card-studied {
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: #342e2e;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+p.studied {
+  color: #59E8B5;
+}
+
+p.in-progress {
+  color: #FF983A;
+}
+
+.deck-cards .card {
   color: #02020a;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   margin-bottom: 10px;
@@ -92,19 +145,12 @@ section#flashcard-show > h1 {
   justify-content: start;
 }
 
-.cards-display .card .term {
+.deck-cards .card .term {
   font-weight: 700;
-  padding: 0 20px;
-  text-align: center;
-  min-width: 150px;
   width: 100%;
-  max-width: 150px;
 }
 
-.cards-display .card .definition {
-  border-left: 2px solid #02020a;
-  padding: 0 20px;
-  text-align: center;
+.deck-cards .card .definition {
   width: 100%;
 }
 
@@ -141,10 +187,6 @@ section#flashcard-show > h1 {
 
 .showcase-buttons {
   min-height: 5em;
-}
-
-.carousel-container {
-
 }
 
 .carousel-top {

@@ -7,24 +7,41 @@
     <link rel="stylesheet" href="/css/style.css" type="text/css" />
     <link rel="stylesheet" href="/css/show.css" type="text/css" />
     <link rel="stylesheet" href="/css/components.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
   </head>
   <body>
     <%- include('../partials/navbar') %>
     <section id="flashcard-show">
-      <h1><%= flashcard.name %></h1>
-      <div class="flashcard-info">
-        <div class="flashcard-description">
-          <p><%= flashcard.description %></p>
+      <div class="deck-info">
+        <h1><%= flashcard.name %></h1>
+      <p class="flashcard-description"><%= flashcard.description %></p>
+      </div>
+      
+      <div class="flashcard-header">
+        <div class="deck-activities">
+          <a href="" class="button-key">
+            Flashcards ⚡
+            <!-- <i class="fa-regular fa-compass"></i> -->
+          </a>
+          <a href="" class="button-key">
+            Learn set 📖
+            <!-- <i class="fa-solid fa-lightbulb"></i> -->
+          </a>
+          <a href="" class="button-key">
+            Test your knowledge ☝️
+            <!-- <i class="fa-solid fa-brain"></i> -->
+          </a>
         </div>
         <% if(currentUser._id.equals(flashcard.author._id)) { %>
         <div class="flashcard-options">
           <a href="/flashcards/<%=flashcard._id%>/edit" class="button-30"
-            >Edit</a
-          >
+            >Edit</a>
           <button
             class="button-warning delete-button"
-            onclick="deleteFlashcardBtn()"
-          >
+            onclick="deleteFlashcardBtn()">
             Delete
           </button>
           <div class="delete-warning" id="deleteWarning">
@@ -32,8 +49,7 @@
             <div class="options">
               <form
                 action="/flashcards/<%=flashcard._id%>/?_method=DELETE"
-                method="POST"
-              >
+                method="POST">
                 <button class="button-30" id="delete">Delete</button>
               </form>
               <button class="cancel-delete button-30" onclick="cancelDelete()">
@@ -50,36 +66,49 @@
             <button class="button-key" id="move-left"><</button>
             <div class="carousel">
               <% for (let card of flashcard.cards) { %>
-                <div class="flipcard-wrapper">
-                  <div class="flipcard" data-toggle-class="flipped">
-                    <div class="flipcard-front"><h1><%= card.term %></h1></div>
-                    <div class="flipcard-back"><h1><%= card.definition %></h1></div>
+              <div class="flipcard-wrapper">
+                <div class="flipcard" data-toggle-class="flipped">
+                  <div class="flipcard-front"><h1><%= card.term %></h1></div>
+                  <div class="flipcard-back">
+                    <h1><%= card.definition %></h1>
                   </div>
                 </div>
+              </div>
               <% } %>
             </div>
             <button class="button-key" id="move-right">></button>
+          </div>
+          <div id="pIndicator"></div>
+          <!-- <div class="shortcuts-menu">
+          <h3>Shortcuts</h3>
+          <P>Press <span class="button-key">spacebar</span> to flip the card</P>
+        <p>Press <span class="button-key"><</span> and <span class="button-key">></span> to change the cards</p>
+        </div> -->
         </div>
-        <div id="pIndicator"></div>
-      </div>
-        
-        <div class="showcase-buttons">
-        </div>
-        <div class="cards-display">
-          <p>Not studied: <%= flashcard.cards.length %></p>
-          <ul>
-            <% for(let card of flashcard.cards) { %>
-            <li>
-              <div class="card">
-                <p class="term"><%= card.term %></p>
-                <p class="definition"><%= card.definition %></p>
-              </div>
-            </li>
-            <% } %>
-          </ul>
+        <div class="deck-cards">
+          <h2>Deck terms</h2>
+          <div class="terms-section">
+            <p class="card-studied in-progress">In progress: <%= flashcard.cards.length %></p>
+            <ul>
+              <% for(let card of flashcard.cards) { %>
+              <li>
+                <div class="card">
+                  <p class="term"><%= card.term %></p>
+                  <p class="definition"><%= card.definition %></p>
+                </div>
+              </li>
+              <% } %>
+            </ul>
+          </div>
+          <div class="terms-section">
+            <p class="card-studied studied">
+              Studied: <%= flashcard.cards.length %>
+            </p>
+          </div>
         </div>
       </div>
     </section>
+    <%- include('../partials/waves') %>
     <script src="/js/script.js" defer></script>
     <script src="/js/flipcard.js" defer></script>
   </body>
