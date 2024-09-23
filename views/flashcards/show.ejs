@@ -17,31 +17,30 @@
     <section id="flashcard-show">
       <div class="deck-info">
         <h1><%= flashcard.name %></h1>
-      <p class="flashcard-description"><%= flashcard.description %></p>
+        <p class="flashcard-description"><%= flashcard.description %></p>
       </div>
-      
+
       <div class="flashcard-header">
         <div class="deck-activities">
-          <a href="" class="button-key">
+          <a href="/flashcards/<%=flashcard._id%>/study" class="button-key">
             Flashcards ⚡
-            <!-- <i class="fa-regular fa-compass"></i> -->
           </a>
           <a href="" class="button-key">
             Learn set 📖
-            <!-- <i class="fa-solid fa-lightbulb"></i> -->
           </a>
           <a href="" class="button-key">
             Test your knowledge ☝️
-            <!-- <i class="fa-solid fa-brain"></i> -->
           </a>
         </div>
         <% if(currentUser._id.equals(flashcard.author._id)) { %>
         <div class="flashcard-options">
           <a href="/flashcards/<%=flashcard._id%>/edit" class="button-30"
-            >Edit</a>
+            >Edit</a
+          >
           <button
             class="button-warning delete-button"
-            onclick="deleteFlashcardBtn()">
+            onclick="deleteFlashcardBtn()"
+          >
             Delete
           </button>
           <div class="delete-warning" id="deleteWarning">
@@ -49,7 +48,8 @@
             <div class="options">
               <form
                 action="/flashcards/<%=flashcard._id%>/?_method=DELETE"
-                method="POST">
+                method="POST"
+              >
                 <button class="button-30" id="delete">Delete</button>
               </form>
               <button class="cancel-delete button-30" onclick="cancelDelete()">
@@ -88,7 +88,9 @@
         <div class="deck-cards">
           <h2>Deck terms</h2>
           <div class="terms-section">
-            <p class="card-studied in-progress">In progress: <%= flashcard.cards.length %></p>
+            <p class="card-studied in-progress">
+              In progress: <%= flashcard.cards.length %>
+            </p>
             <ul>
               <% for(let card of flashcard.cards) { %>
               <li>
@@ -104,6 +106,14 @@
             <p class="card-studied studied">
               Studied: <%= flashcard.cards.length %>
             </p>
+            <ul>
+              <li>
+                <div class="card">
+                  <p class="term"><%= flashcard.cards[0].term%></p>
+                  <p class="definition"><%= flashcard.cards[0].definition%></p>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

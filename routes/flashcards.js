@@ -19,6 +19,7 @@ router.route('/:id')
 .put(isLoggedIn, isAuthor, catchAsync(flashcards.updateFlashcard))
 .delete(isLoggedIn, isAuthor, catchAsync(flashcards.deleteFlashcard))
 
-router.get("/:id/edit",isLoggedIn, isAuthor, catchAsync(flashcards.renderEditForm));
+router.get("/:id/edit",isLoggedIn, isAuthor, flashcards.renderEditForm);
+router.get("/:id/study", isLoggedIn, flashcards.renderStudy);
 
 module.exports = router;

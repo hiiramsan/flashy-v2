@@ -13,9 +13,6 @@ module.exports.index = async (req, res) => {
   } else {
     req.flash('info', "Create your second set!");
   }
-
-  /* console.log("Info Flash Message:", req.flash('info'));  */
-
   res.render("flashcards/home", { flashcards });
 };
 
@@ -158,3 +155,15 @@ module.exports.updateFlashcard = async (req, res) => {
     res.redirect(`/flashcards/${req.params.id}/edit`);
   }
 };
+
+module.exports.renderStudy = async (req, res) => {
+  const { id } = req.params;
+  const flashcard = await Flashcard.findById(id)
+  .populate('cards');
+  if(!flashcard) {
+    req.flash('error', 'Flashcard Not Found');
+    return res.redirect('/flashcards')
+  }
+
+  res.render('flashcards/study', {flashcard});
+}
