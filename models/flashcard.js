@@ -14,30 +14,13 @@ const FlashcardSchema = new Schema({
     },
     cards: [
         {
-            card: { 
-                type: Schema.Types.ObjectId, 
-                ref: 'Card' 
-            },
-            status: { 
-                type: String, 
-                enum: ['in_progress', 'known', 'new'], 
-                default: 'new' 
-            }  
+            type: Schema.Types.ObjectId,
+            ref: 'Card'
         }
     ],
-    isVisible: { type: Boolean, default: true },
-    studyHistory: [
-        {
-            date: { type: Date, default: Date.now },
-            cardsStudied: [{ 
-                type: Schema.Types.ObjectId, 
-                ref: 'Card' 
-            }]
-        }
-    ]  
+    isVisible: { type: Boolean, default: true }
 
 }, opts);
-
 
 FlashcardSchema.virtual('cardCount').get(function () {
     return this.cards.length;
