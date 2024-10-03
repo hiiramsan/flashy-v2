@@ -6,14 +6,13 @@ const ejsMate = require('ejs-mate');
 const mongoose = require('mongoose');
 const flashcardsRoutes = require('./routes/flashcards');
 const usersRoutes = require('./routes/users');
+const cardsRoutes = require('./routes/cards');
 const ExpressError = require('./utils/ExpressError');
 const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
 const LocalStrategy = require('passport-local')
 const User = require('./models/users');
-const Flashcard = require('./models/flashcard');
-const Card = require('./models/card');
 
 // connection to database
 mongoose.connect('mongodb://127.0.0.1:27017/flashy-demo')
@@ -77,6 +76,7 @@ app.get('/', (req, res) => {
 //routers
 app.use("/flashcards", flashcardsRoutes);
 app.use("/", usersRoutes);
+app.use("/", cardsRoutes)
 
 app.all('*', (req, res, next) => {
   next(new ExpressError('Page Not Found', 404))

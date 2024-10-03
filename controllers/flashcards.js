@@ -167,3 +167,21 @@ module.exports.renderStudy = async (req, res) => {
 
   res.render('flashcards/study', {flashcard});
 }
+
+module.exports.toggleStar = async(req, res) => {
+  try {
+    const card = await Card.findById(req.params.id);
+    if(!card) {
+      req.flash('error', 'Card Not Found');
+    }
+
+    card.star = !card.star;
+    await card.save();
+    return res.status(200).json({ star: card.star });
+
+  } catch(err) {
+    console.log('Error toggling star');
+    console.log(err);
+    return res.status(500).json({ message: "An error occurred" });
+  }
+}

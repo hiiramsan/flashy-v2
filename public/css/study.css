@@ -1,3 +1,251 @@
-main {
-    min-height: 100vh;
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
+
+body {
+  background-color: #1d1e1e;
+}
+
+main {
+  height: 100vh;
+}
+
+.fs-navbar {
+  display: flex;
+  flex-direction: row;
+  height: 100px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #252929;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #fff;
+  padding: 0 40px;
+}
+
+.fs-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.nav-button {
+  border: 1px solid #fff;
+  display: flex;
+  border-radius: 50px;
+  background: none;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #fff;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.opt-btn {
+  height: 50px;
+  padding: 0 1.4rem;
+  gap: 10px;
+}
+
+.circle-button {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+
+.nav-icon {
+  height: 60%;
+  fill: none;
+  stroke: #fff;
+  transition: stroke 0.3s ease;
+}
+
+.left-bar .right-bar {
+  flex: 1;
+}
+
+.middle {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.right-bar {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.nav-button:hover {
+  background-color: #fff;
+  color: #333;
+}
+
+.nav-button:hover .nav-icon {
+  stroke: #333;
+}
+
+.study-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 70%;
+  position: relative;
+}
+
+.flipcard-wrapper {
+  perspective: 1000px;
+  position: relative;
+  cursor: pointer;
+}
+
+.flipcard {
+  width: 800px;
+  height: 500px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.65, 0.05, 0.36, 1);
+}
+
+.flipcard-front,
+.flipcard-back {
+  font-family: "Montserrat", sans-serif;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 500;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #333;
+}
+
+.flipcard-back {
+  transform: rotateX(180deg);
+}
+
+.flipped {
+  transform: rotateX(180deg);
+}
+
+.fs-study {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.fs-controls {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 8px;
+  border-radius: 40px;
+  background-color: #282929;
+  width: 200px;
+
+}
+
+#pIndicator {
+  font-family: 'Montserrat', sans-serif;
+  width: 100px;
+  text-align: center;
+  font-size: 18px;
+  color: #fff;
+}
+
+.control-btn {
+  background: none;
+  border: none;
+  width: 50px;
+  cursor: pointer;
+  border-radius: 100%;
+}
+
+.control-btn svg {
+  width: 50px;
+  height: 50px;
+  transition: fill 0.1s; 
+}
+
+.control-btn:hover {
+  background-color: #fff; 
+}
+
+.control-btn:hover svg {
+  fill: #333; 
+}
+
+.progress-bar-container {
+  position: relative;
+  width: 100%;
+  height: 6px;
+  background-color: #252929; 
+  transition: 0.2s ease;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background: #8a2387;
+  background: -webkit-linear-gradient(
+    0deg,
+    #8a2387 0%,
+    #e94057 50%,
+    #f27121 100%
+  );
+  background: linear-gradient(0deg, #8a2387 0%, #e94057 50%, #f27121 100%);
+  transition: width 0.3s ease-in-out; 
+}
+
+.flipcard-opts {
+  display: flex;
+  gap: 12px;
+  /* margin-left: auto; */
+  width: 100%;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.flipcard-opts h4 {
+  color: #fff;
+  opacity: 0.5;
+  font-size: 20px;
+  font-weight: normal;
+}
+
+
+.flipcard-opts svg {
+  width: 50px;
+  height: 50px;
+}
+
+#star:hover svg {
+  stroke: #252929;
+  stroke-width: 1px;
+}
+
+button#star.starred svg polygon {
+  fill: #F9C846; 
+  stroke: none;
+  transition: 0.3s ease;
+}
+

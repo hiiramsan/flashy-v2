@@ -1,16 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Study set</title>
-    <link rel="stylesheet" href="/css/style.css" type="text/css" />
     <link rel="stylesheet" href="/css/components.css" type="text/css" />
     <link rel="stylesheet" href="/css/study.css" type="text/css" />
-</head>
-<body>
-<%- include('../partials/navbar') %>
-<main></main>
-<%- include('../partials/waves') %>
-</body>
+    <script src="/js/study.js" defer></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <main>
+      <div class="fs-navbar">
+        <div class="left-bar">
+          <button class="nav-button opt-btn">
+            <p>⚡ Flashcards</p>
+            <i class="fa-solid fa-caret-down"></i>
+          </button>
+        </div>
+        <h3 class="middle"><%= flashcard.name %></h3>
+        <div class="right-bar">
+          <button class="nav-button opt-btn">
+            <p>Options</p>
+          </button>
+          <a
+            href="/flashcards/<%=flashcard._id%>"
+            class="nav-button circle-button"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              class="nav-icon"
+            >
+              <line x1="4" y1="4" x2="20" y2="20" stroke-width="1" />
+              <line x1="20" y1="4" x2="4" y2="20" stroke-width="1" />
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar"></div>
+      </div>
+      <div class="fs-study">
+        <div class="fs-main">
+          <div class="study-container">
+            <% for (let card of flashcard.cards) { %>
+            <div class="flipcard-wrapper">
+              <div class="flipcard">
+                <div class="flipcard-front">
+                  <div class="flipcard-opts">
+                    <h4>Term</h4>
+                    <button class="nav-button <%= card.star === true ? 'starred' : '' %>" id="star" data-id="<%= card._id %>">
+                      <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#fff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><polygon points="32 12 38.41 24.84 52 27.28 42.37 37.66 44.36 52 32 45.58 19.64 52 21.63 37.66 12 27.28 25.59 24.84 32 12"></polygon></g></svg>
+                    </button>
+                  </div>
+                  <p><%= card.term %></p>
+                  <div></div>
+                </div>
+                <div class="flipcard-back">
+                  <div class="flipcard-opts">
+                    <h4>Definition</h4>
+                    <button class="nav-button <%= card.star === true ? 'starred' : '' %>" id="star">
+                      <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#fff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><polygon points="32 12 38.41 24.84 52 27.28 42.37 37.66 44.36 52 32 45.58 19.64 52 21.63 37.66 12 27.28 25.59 24.84 32 12"></polygon></g></svg>
+                    </button>
+                  </div>
+                  <p><%= card.definition %></p>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+            <% } %>
+          </div>
+          <div class="fs-controls">
+            <button class="control-btn" id="move-left">
+              <svg fill="#fff" height="200px" width="200px" version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M16,2C8.3,2,2,8.3,2,16s6.3,14,14,14s14-6.3,14-14S23.7,2,16,2z M18.7,20.3c0.4,0.4,0.4,1,0,1.4C18.5,21.9,18.3,22,18,22 s-0.5-0.1-0.7-0.3l-5-5c-0.4-0.4-0.4-1,0-1.4l5-5c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4L14.4,16L18.7,20.3z"></path> </g></svg>
+            </button>
+            <div id="pIndicator"></div>
+            <button class="control-btn" id="move-right">
+              <svg fill="#fff" height="200px" width="200px" version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M16,2C8.3,2,2,8.3,2,16s6.3,14,14,14s14-6.3,14-14S23.7,2,16,2z M19.7,16.7l-5,5C14.5,21.9,14.3,22,14,22s-0.5-0.1-0.7-0.3 c-0.4-0.4-0.4-1,0-1.4l4.3-4.3l-4.3-4.3c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l5,5C20.1,15.7,20.1,16.3,19.7,16.7z"></path> </g></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
 </html>

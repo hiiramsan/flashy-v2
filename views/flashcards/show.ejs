@@ -79,42 +79,68 @@
             <button class="button-key" id="move-right">></button>
           </div>
           <div id="pIndicator"></div>
-          <!-- <div class="shortcuts-menu">
-          <h3>Shortcuts</h3>
-          <P>Press <span class="button-key">spacebar</span> to flip the card</P>
-        <p>Press <span class="button-key"><</span> and <span class="button-key">></span> to change the cards</p>
-        </div> -->
         </div>
         <div class="deck-cards">
           <h2>Deck terms</h2>
+          <% if(flashcard.cards.filter(card => card.status === 'new').length > 0) { %>
+            <div class="terms-section">
+              <p class="card-studied new">
+                New: <%= flashcard.cards.filter(card => card.status === 'new').length %>
+              </p>
+              <ul>
+                <% for(let card of flashcard.cards) { %>
+                  <% if(card.status == 'new') { %>
+                    <li>
+                      <div class="card">
+                        <p class="term"><%= card.term %></p>
+                        <p class="definition"><%= card.definition %></p>
+                      </div>
+                    </li>
+                  <% } %>
+                <% } %>
+              </ul>
+            </div>
+          <% } %>
+          
+          <% if(flashcard.cards.filter(card => card.status === 'in_progress').length > 0) { %>
           <div class="terms-section">
             <p class="card-studied in-progress">
-              In progress: <%= flashcard.cards.length %>
+              In progress: <%= flashcard.cards.filter(card => card.status === 'in_progress').length %>
             </p>
             <ul>
               <% for(let card of flashcard.cards) { %>
-              <li>
-                <div class="card">
-                  <p class="term"><%= card.term %></p>
-                  <p class="definition"><%= card.definition %></p>
-                </div>
-              </li>
+                <% if(card.status == 'in_progress') { %>
+                  <li>
+                    <div class="card">
+                      <p class="term"><%= card.term %></p>
+                      <p class="definition"><%= card.definition %></p>
+                    </div>
+                  </li>
+                <% } %>
               <% } %>
             </ul>
           </div>
+          <% } %>
+
+          <% if(flashcard.cards.filter(card => card.status === 'known').length > 0) { %>
           <div class="terms-section">
             <p class="card-studied studied">
-              Studied: <%= flashcard.cards.length %>
+              Studied: <%= flashcard.cards.filter(card => card.status === 'known').length %>
             </p>
             <ul>
-              <li>
-                <div class="card">
-                  <p class="term"><%= flashcard.cards[0].term%></p>
-                  <p class="definition"><%= flashcard.cards[0].definition%></p>
-                </div>
-              </li>
+              <% for(let card of flashcard.cards) { %>
+                <% if(card.status == 'known') { %>
+                  <li>
+                    <div class="card">
+                      <p class="term"><%= card.term %></p>
+                      <p class="definition"><%= card.definition %></p>
+                    </div>
+                  </li>
+                <% } %>
+              <% } %>
             </ul>
           </div>
+          <% } %>
         </div>
       </div>
     </section>
