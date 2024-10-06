@@ -6,7 +6,6 @@ const opts = { toJSON: { virtuals: true } }
 
 const FlashcardSchema = new Schema({
     name: { type: String, required: true },
-    description: { type: String, required: false },
     background: { type: String, required: false },
     author: {
         type: Schema.Types.ObjectId,

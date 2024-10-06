@@ -16,14 +16,14 @@
     <main>
       <div class="fs-navbar">
         <div class="left-bar">
-          <button class="nav-button opt-btn">
+          <button class="nav-button opt-btn" id="dropdownBtn">
             <p>⚡ Flashcards</p>
             <i class="fa-solid fa-caret-down"></i>
           </button>
         </div>
         <h3 class="middle"><%= flashcard.name %></h3>
         <div class="right-bar">
-          <button class="nav-button opt-btn">
+          <button class="nav-button opt-btn" id="optionsBtn">
             <p>Options</p>
           </button>
           <a
@@ -44,6 +44,31 @@
       <div class="progress-bar-container">
         <div class="progress-bar"></div>
       </div>
+      <div class="dropdown-container">
+        <ul>
+          <li>
+            <a href="">
+              <div class="dd-mode">🧠   Learn Mode</div>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+            
+          </li>
+          <li>
+            <a href="">
+              <div class="dd-mode">📓   Practice Test</div>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <div class="dd-mode">✍️  Writing mode</div>
+            <i class="fa-solid fa-arrow-right"></i>
+            </a>
+            
+          </li>
+        </ul>
+      </div>
+      <div id="overlay"></div>
       <div class="fs-study">
         <div class="fs-main">
           <div class="study-container">
@@ -63,7 +88,7 @@
                 <div class="flipcard-back">
                   <div class="flipcard-opts">
                     <h4>Definition</h4>
-                    <button class="nav-button <%= card.star === true ? 'starred' : '' %>" id="star">
+                    <button class="nav-button <%= card.star === true ? 'starred' : '' %>" id="star" data-id="<%= card._id %>" >
                       <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#fff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><polygon points="32 12 38.41 24.84 52 27.28 42.37 37.66 44.36 52 32 45.58 19.64 52 21.63 37.66 12 27.28 25.59 24.84 32 12"></polygon></g></svg>
                     </button>
                   </div>
@@ -84,6 +109,8 @@
             </button>
           </div>
         </div>
+      </div>
+      <div class="options-menu">
       </div>
     </main>
   </body>

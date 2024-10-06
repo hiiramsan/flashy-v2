@@ -17,7 +17,6 @@
     <section id="flashcard-show">
       <div class="deck-info">
         <h1><%= flashcard.name %></h1>
-        <p class="flashcard-description"><%= flashcard.description %></p>
       </div>
 
       <div class="flashcard-header">
@@ -29,7 +28,7 @@
             Learn set 📖
           </a>
           <a href="" class="button-key">
-            Test your knowledge ☝️
+            Take a test ☝️
           </a>
         </div>
         <% if(currentUser._id.equals(flashcard.author._id)) { %>

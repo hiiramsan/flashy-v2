@@ -32,7 +32,6 @@ module.exports.create = async (req, res, next) => {
 
     const flashcard = new Flashcard({
       name: req.body.name,
-      description: req.body.description,
       isVisible: isVisible,
       background: req.body.background,
       author: req.user._id
@@ -132,7 +131,6 @@ module.exports.updateFlashcard = async (req, res) => {
 
     // Update flashcard metadata
     flashcard.name = req.body.name;
-    flashcard.description = req.body.description;
     flashcard.background = req.body.background;
     flashcard.isVisible = req.body.visibility === 'true';
 

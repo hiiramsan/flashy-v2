@@ -39,7 +39,7 @@ main {
   display: flex;
   border-radius: 50px;
   background: none;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 16px;
   color: #fff;
@@ -161,11 +161,10 @@ main {
   border-radius: 40px;
   background-color: #282929;
   width: 200px;
-
 }
 
 #pIndicator {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   width: 100px;
   text-align: center;
   font-size: 18px;
@@ -183,22 +182,22 @@ main {
 .control-btn svg {
   width: 50px;
   height: 50px;
-  transition: fill 0.1s; 
+  transition: fill 0.1s;
 }
 
 .control-btn:hover {
-  background-color: #fff; 
+  background-color: #fff;
 }
 
 .control-btn:hover svg {
-  fill: #333; 
+  fill: #333;
 }
 
 .progress-bar-container {
   position: relative;
   width: 100%;
   height: 6px;
-  background-color: #252929; 
+  background-color: #252929;
   transition: 0.2s ease;
 }
 
@@ -213,7 +212,7 @@ main {
     #f27121 100%
   );
   background: linear-gradient(0deg, #8a2387 0%, #e94057 50%, #f27121 100%);
-  transition: width 0.3s ease-in-out; 
+  transition: width 0.3s ease-in-out;
 }
 
 .flipcard-opts {
@@ -232,7 +231,6 @@ main {
   font-weight: normal;
 }
 
-
 .flipcard-opts svg {
   width: 50px;
   height: 50px;
@@ -244,8 +242,82 @@ main {
 }
 
 button#star.starred svg polygon {
-  fill: #F9C846; 
+  fill: #f9c846;
   stroke: none;
   transition: 0.3s ease;
 }
 
+.dropdown-container {
+  background-color: #282929;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  color: #fff;
+  max-height: 300px;
+  font-size: 1.2rem;
+  overflow: hidden;
+  font-family: "Montserrat", sans-serif;
+  position: absolute;
+  top: 5rem;
+  left: 2.4rem;
+  width: 24rem;
+  display: none;
+  z-index: 1000;
+  transition: max-height 0.3s ease-out;
+}
+
+.show {
+  display: block;
+}
+
+
+.dropdown-container li {
+  list-style: none;
+  padding-bottom: 0.8rem;
+}
+
+.dropdown-container li:last-child {
+  padding-bottom: 0;
+}
+
+.dropdown-container li a {
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.dropdown-container li a:hover {
+  color: #f9c846;
+}
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); 
+  z-index: 999; 
+  display: none; 
+  transition: opacity 0.5s ease; 
+}
+
+.blur-content {
+  filter: blur(5px); 
+  transition: filter 0.5s ease;
+}
+
+.options-menu {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60%;
+  height: 70%;
+  background-color: #e94057;
+  border-radius: 1rem;
+  transform: translate(-50%, -50%);
+  background-color: #282929;
+  color: #fff;
+}
