@@ -17,7 +17,12 @@ const FlashcardSchema = new Schema({
             ref: 'Card'
         }
     ],
-    isVisible: { type: Boolean, default: true }
+    isVisible: { type: Boolean, default: true },
+    options: {
+        answerWithTerm: { type: Boolean, default: true },  
+        answerWithDefinition: { type: Boolean, default: false },  
+        shuffle: { type: Boolean, default: false }  
+      }
 
 }, opts);
 

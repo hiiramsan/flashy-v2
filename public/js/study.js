@@ -111,41 +111,59 @@ starButtons.forEach((btn) => {
   });
 });
 
-
-// navbar dropdown container logic and option button
 const dropdownBtn = document.getElementById("dropdownBtn");
 const dropdownContainer = document.querySelector(".dropdown-container");
-const overlay = document.getElementById('overlay');
-const optionBtn = document.getElementById("optionBtn"); // added option button
+
+const optionsBtn = document.getElementById("optionsBtn"); 
+const optionsMenu = document.querySelector(".options-menu"); 
 
 dropdownBtn.addEventListener("click", function () {
   dropdownContainer.classList.toggle("show");
+  toggleBlur();
+});
 
-  if (dropdownContainer.classList.contains("show")) {
-    overlay.style.display = 'block'; 
-    document.body.classList.add("blur-background"); 
-  } else {
-    overlay.style.display = 'none'; 
-    document.body.classList.remove("blur-background"); 
-  }
+optionsBtn.addEventListener("click", function () {
+  optionsMenu.classList.toggle("show");
+  toggleBlur();
 });
 
 document.addEventListener("click", function (event) {
-  const isClickInsideDropdown = dropdownContainer.contains(event.target);
-  const isClickOnButton = dropdownBtn.contains(event.target);
+  if (!dropdownContainer.contains(event.target) && !dropdownBtn.contains(event.target)) {
+    if (!dropdownContainer.contains(event.target) && !dropdownBtn.contains(event.target)) {
+      dropdownContainer.classList.remove("show");
+      toggleBlur(); 
+    }
+  }
 
-  if (!isClickInsideDropdown && !isClickOnButton) {
-    dropdownContainer.classList.remove("show");
-    overlay.style.display = 'none'; 
-    document.body.classList.remove("blur-background"); 
+  if (!optionsMenu.contains(event.target) && !optionsBtn.contains(event.target)) {
+    optionsMenu.classList.remove("show");
+    toggleBlur(); 
   }
 });
 
 document.addEventListener("keydown", function (event) {
   if (event.key === "Escape") {
     dropdownContainer.classList.remove("show");
-    overlay.style.display = 'none';
-    document.body.classList.remove("blur-background");
+    optionsMenu.classList.remove("show");
+    toggleBlur(); 
   }
 });
 
+document.getElementById('close-options').addEventListener('click', function () {
+  optionsMenu.classList.remove("show");
+  toggleBlur(); 
+});
+
+function toggleBlur() {
+  const body = document.body; 
+  const dropdownOpen = dropdownContainer.classList.contains("show");
+  const optionsOpen = optionsMenu.classList.contains("show");
+  
+  if (dropdownOpen || optionsOpen) {
+    // document.body.classList.add("blur");
+    overlay.style.display = 'block';
+  } else {
+    // document.body.classList.remove("blur");
+    overlay.style.display = 'none';
+  }
+}
