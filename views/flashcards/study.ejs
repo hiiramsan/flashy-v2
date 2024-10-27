@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/components.css" type="text/css" />
     <link rel="stylesheet" href="/css/study.css" type="text/css" />
     <script src="/js/study.js" defer></script>
+    <script src="/js/fs-navbar.js" defer></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -14,60 +15,7 @@
   </head>
   <body>
     <main>
-      <div class="fs-navbar">
-        <div class="left-bar">
-          <button class="nav-button opt-btn" id="dropdownBtn">
-            <p>⚡ Flashcards</p>
-            <i class="fa-solid fa-caret-down"></i>
-          </button>
-        </div>
-        <h3 class="middle"><%= flashcard.name %></h3>
-        <div class="right-bar">
-          <button class="nav-button opt-btn" id="optionsBtn">
-            <p>Options</p>
-          </button>
-          <a
-            href="/flashcards/<%=flashcard._id%>"
-            class="nav-button circle-button"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              class="nav-icon"
-            >
-              <line x1="4" y1="4" x2="20" y2="20" stroke-width="1" />
-              <line x1="20" y1="4" x2="4" y2="20" stroke-width="1" />
-            </svg>
-          </a>
-        </div>
-      </div>
-      <div class="progress-bar-container">
-        <div class="progress-bar"></div>
-      </div>
-      <div class="dropdown-container">
-        <ul>
-          <li>
-            <a href="">
-              <div class="dd-mode">🧠   Learn Mode</div>
-              <i class="fa-solid fa-arrow-right"></i>
-            </a>
-            
-          </li>
-          <li>
-            <a href="">
-              <div class="dd-mode">📓   Practice Test</div>
-              <i class="fa-solid fa-arrow-right"></i>
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <div class="dd-mode">✍️  Writing mode</div>
-            <i class="fa-solid fa-arrow-right"></i>
-            </a>
-            
-          </li>
-        </ul>
-      </div>
+      <%- include('../partials/fs-navbar') %>
       <div id="overlay"></div>
       <div class="fs-study">
         <div class="fs-main">
@@ -110,39 +58,7 @@
           </div>
         </div>
       </div>
-      <div class="options-menu">
-        <div class="options-header">
-          <h1>Flashcard options</h1>
-          <button
-            id="close-options"
-            class="nav-button circle-button"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              class="nav-icon"
-            >
-              <line x1="4" y1="4" x2="20" y2="20" stroke-width="1" />
-              <line x1="20" y1="4" x2="4" y2="20" stroke-width="1" />
-            </svg>
-          </button>
-        </div>
-        
-          <form action="/flashcards/<%=flashcard._id%>/config" method="POST" class="options-container">
-            <div class="option">
-              <p>Shuffle cards</p>
-              <div class="checkbox-wrapper-63">
-                <label class="switch">
-                  <input type="checkbox" id="shuffle" name="shuffle" <%= flashcard.options.shuffle ? "checked" : ""  %>> 
-                  <span class="slider"></span>
-                </label>
-              </div>
-            </div>
-            <button class="button-30">
-              Save
-            </button>
-          </form>
-      </div>
+
     </main>
   </body>
 </html>

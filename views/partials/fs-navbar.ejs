@@ -1,0 +1,87 @@
+<div class="fs-navbar">
+    <div class="left-bar">
+      <button class="nav-button opt-btn" id="dropdownBtn">
+        <p><%= mode  %></p>
+        <i class="fa-solid fa-caret-down"></i>
+      </button>
+    </div>
+    <h3 class="middle"><%= flashcard.name %></h3>
+    <div class="right-bar">
+      <button class="nav-button opt-btn" id="optionsBtn">
+        <p>Options</p>
+      </button>
+      <a
+        href="/flashcards/<%=flashcard._id%>"
+        class="nav-button circle-button"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          class="nav-icon"
+        >
+          <line x1="4" y1="4" x2="20" y2="20" stroke-width="1" />
+          <line x1="20" y1="4" x2="4" y2="20" stroke-width="1" />
+        </svg>
+      </a>
+    </div>
+  </div>
+  <div class="progress-bar-container">
+    <div class="progress-bar"></div>
+  </div>
+  <div class="dropdown-container">
+    <ul>
+      <li>
+        <a href="/flashcards/<%= flashcard._id %>/study">
+          <div class="dd-mode">🧠   Flashcards</div>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+        
+      </li>
+      <li>
+        <a href="/flashcards/<%= flashcard._id %>/test">
+          <div class="dd-mode">📓   Practice Test</div>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </li>
+      <li>
+        <a href="/flashcards/<%=flashcard._id%>/writing">
+          <div class="dd-mode">✍️  Writing</div>
+        <i class="fa-solid fa-arrow-right"></i>
+        </a>
+        
+      </li>
+    </ul>
+  </div>
+  <div class="options-menu">
+    <div class="options-header">
+      <h1>Flashcard options</h1>
+      <button
+        id="close-options"
+        class="nav-button circle-button"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          class="nav-icon"
+        >
+          <line x1="4" y1="4" x2="20" y2="20" stroke-width="1" />
+          <line x1="20" y1="4" x2="4" y2="20" stroke-width="1" />
+        </svg>
+      </button>
+    </div>
+    
+      <form action="/flashcards/<%=flashcard._id%>/config" method="POST" class="options-container">
+        <div class="option">
+          <p>Shuffle cards</p>
+          <div class="checkbox-wrapper-63">
+            <label class="switch">
+              <input type="checkbox" id="shuffle" name="shuffle" <%= flashcard.options.shuffle ? "checked" : ""  %>> 
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+        <button class="button-30">
+          Save
+        </button>
+      </form>
+  </div>

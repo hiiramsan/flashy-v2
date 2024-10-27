@@ -160,7 +160,7 @@ module.exports.renderStudy = async (req, res) => {
   if (flashcard.options.shuffle) {
     flashcard.cards = shuffleArray([...flashcard.cards]);
   }
-  res.render("flashcards/study", { flashcard });
+  res.render("flashcards/study", { flashcard, mode:"🧠 Flashcards" });
 };
 
 //shuffle system
@@ -210,6 +210,21 @@ module.exports.updateConfig = async (req, res) => {
     console.error(error);
     req.flash('error', 'An error occurred while updating the shuffle option');
     res.redirect(`/flashcards/${id}/study`);
-}
+}};
 
- };
+module.exports.renderWriting = async(req, res) => {
+  try {
+    const { id } = req.params;
+    const flashcard = await Flashcard.findById(id);
+    if(!flashcard) {
+      req.flash('error', 'Flashcard set not found');
+      return res.redirect('/flashcards');
+    }
+
+    res.render("flashcards/writing", {flashcard, mode: '✍️ Writing'});
+
+  } catch(error) {
+    console.log("gentle error while rendering writing mode!!!")
+    console.log(error);
+  }
+};
