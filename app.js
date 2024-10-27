@@ -63,11 +63,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/dick', (req, res) => {
-  res.send('Holiwis');
-});
-
-
 app.get('/', (req, res) => {
   res.render('home')
 });

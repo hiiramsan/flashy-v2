@@ -1,17 +1,17 @@
 const Flashcard = require("../models/flashcard.js");
 const Card = require("../models/card.js");
-const { flashcardSchema } = require("../validateSchemas.js"); 
+const { flashcardSchema } = require("../validateSchemas.js");
 const ExpressError = require("../utils/ExpressError.js");
 
-
 module.exports.index = async (req, res) => {
-  const flashcards = await Flashcard.find({ author: req.user._id })
-    .populate("author")
+  const flashcards = await Flashcard.find({ author: req.user._id }).populate(
+    "author"
+  );
   /*   .populate("cards"); */
   if (flashcards.length === 0) {
-    req.flash('info', "Create your first set!");
+    req.flash("info", "Create your first set!");
   } else {
-    req.flash('info', "Create your second set!");
+    req.flash("info", "Create your second set!");
   }
   res.render("flashcards/home", { flashcards });
 };
@@ -19,14 +19,14 @@ module.exports.index = async (req, res) => {
 module.exports.create = async (req, res, next) => {
   try {
     const { error } = flashcardSchema.validate(req.body);
-    if(error) {
-      const msg = error.details.map(el => el.message).join(',');
+    if (error) {
+      const msg = error.details.map((el) => el.message).join(",");
       throw new ExpressError(msg, 400);
     }
 
     let isVisible = false;
     console.log(req.body.visibility);
-    if(req.body.visibility === "true") {
+    if (req.body.visibility === "true") {
       isVisible = true;
     }
 
@@ -34,63 +34,60 @@ module.exports.create = async (req, res, next) => {
       name: req.body.name,
       isVisible: isVisible,
       background: req.body.background,
-      author: req.user._id
+      author: req.user._id,
     });
 
     // cards
     const cardData = req.body.cards;
     const cards = await Card.insertMany(cardData);
-    flashcard.cards = cards.map(card => card._id);
+    flashcard.cards = cards.map((card) => card._id);
     await flashcard.save();
 
-    req.flash('success', "Flashcard deck created successfully!")
+    req.flash("success", "Flashcard deck created successfully!");
     res.redirect(`/flashcards/${flashcard._id}`);
   } catch (error) {
     console.error(error);
-    res.redirect('/flashcards/create')
+    res.redirect("/flashcards/create");
   }
-  
 };
 
 module.exports.renderCreate = (req, res) => {
-  res.render('flashcards/create');
-}
+  res.render("flashcards/create");
+};
 
 module.exports.showFlashcard = async (req, res) => {
   try {
-    const flashcard = await Flashcard.findById(req.params.id)
-      .populate('cards');
+    const flashcard = await Flashcard.findById(req.params.id).populate("cards");
     if (!flashcard) {
       req.flash("error", "This set does not exist");
       return res.redirect("/flashcards");
     }
-    res.render('flashcards/show', { flashcard });
+    res.render("flashcards/show", { flashcard });
   } catch (err) {
     console.log(err);
     req.flash("error", "Something went wrong");
     return res.redirect("/flashcards");
   }
-
-}
+};
 
 module.exports.deleteFlashcard = async (req, res) => {
   const { id } = req.params;
   await Flashcard.findByIdAndDelete(id);
-  res.redirect('/flashcards')
-}
+  res.redirect("/flashcards");
+};
 
 module.exports.explore = async (req, res) => {
   try {
-    const flashcards = await Flashcard.find({ isVisible: true })
-      .populate("author");
-  
+    const flashcards = await Flashcard.find({ isVisible: true }).populate(
+      "author"
+    );
+
     if (flashcards.length === 0) {
-      req.flash('info', 'No visible flashcards found');
-      return res.redirect('/flashcards');
+      req.flash("info", "No visible flashcards found");
+      return res.redirect("/flashcards");
     }
 
-    res.render('flashcards/explore', { flashcards });
-
+    res.render("flashcards/explore", { flashcards });
   } catch (error) {
     console.error(error);
     req.flash("error", "Something went wrong");
@@ -101,15 +98,14 @@ module.exports.explore = async (req, res) => {
 
 module.exports.renderEditForm = async (req, res) => {
   const { id } = req.params;
-  const flashcard = await Flashcard.findById(id)
-  .populate('cards');
-  if(!flashcard) {
-    req.flash('error', 'Flashcard not found');
-    return res.redirect('/flashcards');
-  } 
+  const flashcard = await Flashcard.findById(id).populate("cards");
+  if (!flashcard) {
+    req.flash("error", "Flashcard not found");
+    return res.redirect("/flashcards");
+  }
 
-  res.render('flashcards/edit', { flashcard });
-}
+  res.render("flashcards/edit", { flashcard });
+};
 
 module.exports.updateFlashcard = async (req, res) => {
   try {
@@ -118,21 +114,21 @@ module.exports.updateFlashcard = async (req, res) => {
     // Validate the incoming data
     const { error } = flashcardSchema.validate(req.body);
     if (error) {
-      const msg = error.details.map((el) => el.message).join(',');
+      const msg = error.details.map((el) => el.message).join(",");
       throw new ExpressError(msg, 400);
     }
 
     // Find the existing flashcard set
     const flashcard = await Flashcard.findById(id);
     if (!flashcard) {
-      req.flash('error', 'Flashcard not found');
-      return res.redirect('/flashcards');
+      req.flash("error", "Flashcard not found");
+      return res.redirect("/flashcards");
     }
 
     // Update flashcard metadata
     flashcard.name = req.body.name;
     flashcard.background = req.body.background;
-    flashcard.isVisible = req.body.visibility === 'true';
+    flashcard.isVisible = req.body.visibility === "true";
 
     // Delete old cards
     await Card.deleteMany({ _id: { $in: flashcard.cards } });
@@ -145,41 +141,75 @@ module.exports.updateFlashcard = async (req, res) => {
     // Save updated flashcard set
     await flashcard.save();
 
-    req.flash('success', 'Flashcard updated successfully');
+    req.flash("success", "Flashcard updated successfully");
     res.redirect(`/flashcards/${flashcard._id}`);
   } catch (error) {
     console.error(error);
-    req.flash('error', 'An error occurred while updating the flashcard');
+    req.flash("error", "An error occurred while updating the flashcard");
     res.redirect(`/flashcards/${req.params.id}/edit`);
   }
 };
 
 module.exports.renderStudy = async (req, res) => {
   const { id } = req.params;
-  const flashcard = await Flashcard.findById(id)
-  .populate('cards');
-  if(!flashcard) {
-    req.flash('error', 'Flashcard Not Found');
-    return res.redirect('/flashcards')
+  const flashcard = await Flashcard.findById(id).populate("cards");
+  if (!flashcard) {
+    req.flash("error", "Flashcard Not Found");
+    return res.redirect("/flashcards");
   }
+  if (flashcard.options.shuffle) {
+    flashcard.cards = shuffleArray([...flashcard.cards]);
+  }
+  res.render("flashcards/study", { flashcard });
+};
 
-  res.render('flashcards/study', {flashcard});
+//shuffle system
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
 }
 
-module.exports.toggleStar = async(req, res) => {
+module.exports.toggleStar = async (req, res) => {
   try {
     const card = await Card.findById(req.params.id);
-    if(!card) {
-      req.flash('error', 'Card Not Found');
+    if (!card) {
+      req.flash("error", "Card Not Found");
     }
 
     card.star = !card.star;
     await card.save();
     return res.status(200).json({ star: card.star });
-
-  } catch(err) {
-    console.log('Error toggling star');
+  } catch (err) {
+    console.log("Error toggling star");
     console.log(err);
     return res.status(500).json({ message: "An error occurred" });
   }
+};
+
+
+module.exports.updateConfig = async (req, res) => {
+  const { id } = req.params;
+  const { shuffle } = req.body;
+
+  try {
+    const flashcard = await Flashcard.findById(id);
+    if (!flashcard) {
+        req.flash('error', 'Flashcard set not found');
+        return res.redirect('/flashcards');
+    }
+
+    flashcard.options.shuffle = shuffle === 'on';
+    await flashcard.save();
+
+    req.flash('success', `Shuffle option updated to ${flashcard.options.shuffle ? 'enabled' : 'disabled'}`);
+    res.redirect(`/flashcards/${id}/study`);
+} catch (error) {
+    console.error(error);
+    req.flash('error', 'An error occurred while updating the shuffle option');
+    res.redirect(`/flashcards/${id}/study`);
 }
+
+ };

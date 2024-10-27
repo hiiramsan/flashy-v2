@@ -344,9 +344,17 @@ button#star.starred svg polygon {
   margin-bottom: 4rem;
 }
 
+
 .options-header h1 {
   font-size: 2rem;
   color: #fff;
+  
+}
+
+
+.options-container {
+  display: flex;
+  justify-content: space-between;
   
 }
 
@@ -365,3 +373,4 @@ button#star.starred svg polygon {
   background-color: #333;
   transition: background-color 0.3s ease;
 }
+

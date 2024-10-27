@@ -21,7 +21,7 @@ const FlashcardSchema = new Schema({
     options: {
         answerWithTerm: { type: Boolean, default: true },  
         answerWithDefinition: { type: Boolean, default: false },  
-        shuffle: { type: Boolean, default: false }  
+        shuffle: { type: Boolean, default: false },  
       }
 
 }, opts);

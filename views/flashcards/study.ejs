@@ -127,26 +127,21 @@
             </svg>
           </button>
         </div>
-        <div class="options-container">
-          <div class="option">
-            <p>Shuffle cards</p>
-            <div class="checkbox-wrapper-63">
-              <label class="switch">
-                <input type="checkbox" id="visibility" name="visibility" value="true"> 
-                <span class="slider"></span>
-              </label>
+        
+          <form action="/flashcards/<%=flashcard._id%>/config" method="POST" class="options-container">
+            <div class="option">
+              <p>Shuffle cards</p>
+              <div class="checkbox-wrapper-63">
+                <label class="switch">
+                  <input type="checkbox" id="shuffle" name="shuffle" <%= flashcard.options.shuffle ? "checked" : ""  %>> 
+                  <span class="slider"></span>
+                </label>
+              </div>
             </div>
-          </div>
-          <div class="option">
-            <p>Endless mode</p>
-            <div class="checkbox-wrapper-63">
-              <label class="switch">
-                <input type="checkbox" id="visibility" name="visibility" value="true"> 
-                <span class="slider"></span>
-              </label>
-            </div>
-          </div>
-        </div>
+            <button class="button-30">
+              Save
+            </button>
+          </form>
       </div>
     </main>
   </body>
