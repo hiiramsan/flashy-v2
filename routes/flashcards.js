@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const catchAsync = require('../utils/catchAsync.js');
 const flashcards = require('../controllers/flashcards.js');
-const { isLoggedIn, isAuthor } = require('../utils/middleware.js');
+const { isLoggedIn, isAuthor,storeReturnTo, saveLastURL } = require('../utils/middleware.js');
 
 router.route('/')
 .get(isLoggedIn, catchAsync(flashcards.index))
@@ -20,8 +20,8 @@ router.route('/:id')
 .delete(isLoggedIn, isAuthor, catchAsync(flashcards.deleteFlashcard))
 
 router.get("/:id/edit",isLoggedIn, isAuthor, flashcards.renderEditForm);
-router.get("/:id/study", isLoggedIn, flashcards.renderStudy);
-router.get("/:id/writing", isLoggedIn, flashcards.renderWriting);
-router.post("/:id/config", isLoggedIn, isAuthor, catchAsync(flashcards.updateConfig));
+router.get("/:id/study", saveLastURL, isLoggedIn, flashcards.renderStudy);
+router.get("/:id/writing", saveLastURL, /* isLoggedIn,  */flashcards.renderWriting); 
+router.post("/:id/config", storeReturnTo, isLoggedIn, isAuthor, catchAsync(flashcards.updateConfig));
 
 module.exports = router;

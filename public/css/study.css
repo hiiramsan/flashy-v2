@@ -18,7 +18,7 @@ main {
   height: 100px;
   justify-content: space-between;
   align-items: center;
-  background-color: #252929;
+  background-color: #282929;
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 16px;
@@ -374,6 +374,150 @@ button#star.starred svg polygon {
   transition: background-color 0.3s ease;
 }
 
+
+/* writing mode below */
+
+.fs-writing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80%;
+  font-family: 'Montserrat', sans-serif;
+}
+
 .write-container {
+  margin-top: 1em;
+  width: 60%;
+  height: 550px;
+  background-color: #282929;
+  border-radius: 10px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.writing-head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.writing-head p {
+  color: #fff;
+  opacity: 0.5;
+  font-size: 20px;
+  font-weight: normal;
+}
+
+.hide {
+  display: none;
+}
+
+.head-opts {
+  display: flex;
+  gap: 12px;
+  flex-direction: row;
+}
+
+.head-opts svg {
+  width: 50px;
+  height: 50px;
+}
+
+.definition-container {
+  color: #fff;
+  font-size: 1.4em;
+  margin-top: 2em;
+
+}
+
+.guesser-container {
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2em;
+}
+
+.guesser-container input {
+  width: 80%;
+  height: 2.5em;
+  border: none;
+  padding: 1.5em;
+  outline: none;
+  border-radius: 15px;
+  border: 0.15em solid #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.1em;
+  font-weight: 500;
+  background-color: #333;
+  color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); 
   
+}
+
+.guesser-container input:focus {
+  border: .15em solid #1488cc;
+}
+
+.guesser-container button {
+  width: 18%;
+  border-radius: 10px;
+  background-color: #fff;
+  color: #000;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1em;
+  font-weight: 500;
+  transition: 0.3s ease;
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); 
+}
+
+.guesser-container button:hover {
+  cursor: pointer;
+  background-color: #1488cc;
+}
+.bottom-container p#label {
+  color: #fff;
+  font-size: 1.2em;
+  font-weight: 500;
+  margin-bottom: 1em;
+}
+
+
+.feedback p {
+  font-size: 1.2em;
+  color: #fff;
+}
+
+.feedback-card {
+  border-radius: 10px;
+  color: #000;
+  padding: 1em;
+  margin: 1em 0;
+  font-size: 1.2em;
+  font-weight: 500;
+}
+
+.wrong {
+  background-color: rgba(255, 160, 122, 0.763);
+  border: 0.05em solid red;
+}
+
+.right {
+  background-color: rgba(144, 238, 144, 0.753);
+  border: 0.05em solid green;
+}
+
+.continue {
+  text-align: center;
+  color: #fff;
+  margin: 0;
+}
+
+.continue span {
+  height: 8px;
+  margin: 0.5em;
 }

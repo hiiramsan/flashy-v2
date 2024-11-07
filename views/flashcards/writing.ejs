@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/components.css" type="text/css" />
     <link rel="stylesheet" href="/css/study.css" type="text/css" />
     <script src="/js/fs-navbar.js" defer></script>
+    <script src="/js/writing.js" defer></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -17,13 +18,72 @@
       <%- include('../partials/fs-navbar') %>
       <div id="overlay"></div>
       <div class="fs-writing">
-        <div class="write-container">
+        <% for (let card of flashcard.cards) { %>
+        <div class="write-container hide">
+          <div class="top-container">
             <div class="writing-head">
-                
+              <p class="card-type">Definition</p>
+              <div class="head-opts">
+                <div class="nav-button opt-btn">Get a hint</div>
+                <button
+                  class="nav-button <%= card.star === true ? 'starred' : '' %>"
+                  id="star"
+                  data-id="<%= card._id %>"
+                >
+                  <svg
+                    viewBox="0 0 64 64"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    stroke="#fff"
+                  >
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      <polygon
+                        points="32 12 38.41 24.84 52 27.28 42.37 37.66 44.36 52 32 45.58 19.64 52 21.63 37.66 12 27.28 25.59 24.84 32 12"
+                      ></polygon>
+                    </g>
+                  </svg>
+                </button>
+              </div>
             </div>
+            <div class="definition-container">
+              <p><%= card.definition %></p>
+            </div>
+          </div>
+
+          <div class="bottom-container">
+            <div class="feedback" id="feedback">
+              <p id="feedback-wrong"></p>
+              <div class="feedback-card wrong hide" id="wrong-card"></div>
+              <p id="feedback-right"></p>
+              <div class="feedback-card right hide" id="right-card"></div>
+              <div class="continue hide" id="continue"> 
+                Press <span class="button-key">Enter</span> to continue
+              </div>
+            </div>
+
+            <p id="label">Answer to the best of your ability</p>
+            <div class="guesser-container hide" id="guesser-container">
+              <input
+                type="text" 
+                name="guess"
+                id="guesser-input"
+                placeholder="Your answer here..."
+              />
+              <button id="btn-check">Check</button>
+            </div>
+          </div>
         </div>
+        <% } %>
       </div>
-      
+      <script>
+        const flashcardData = <%- JSON.stringify(flashcard) %>;
+      </script>
     </main>
   </body>
 </html>

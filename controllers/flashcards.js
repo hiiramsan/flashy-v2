@@ -205,7 +205,9 @@ module.exports.updateConfig = async (req, res) => {
     await flashcard.save();
 
     req.flash('success', `Shuffle option updated to ${flashcard.options.shuffle ? 'enabled' : 'disabled'}`);
-    res.redirect(`/flashcards/${id}/study`);
+    const redirectUrl = res.locals.returnTo || req.session.returnTo || `/flashcards/${id}/study`;
+    delete req.session.returnTo;
+    res.redirect(redirectUrl);
 } catch (error) {
     console.error(error);
     req.flash('error', 'An error occurred while updating the shuffle option');
@@ -215,7 +217,7 @@ module.exports.updateConfig = async (req, res) => {
 module.exports.renderWriting = async(req, res) => {
   try {
     const { id } = req.params;
-    const flashcard = await Flashcard.findById(id);
+    const flashcard = await Flashcard.findById(id).populate("cards");
     if(!flashcard) {
       req.flash('error', 'Flashcard set not found');
       return res.redirect('/flashcards');

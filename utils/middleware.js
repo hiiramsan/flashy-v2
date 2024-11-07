@@ -2,7 +2,12 @@ const Flashcard = require('../models/flashcard');
 
 module.exports.storeReturnTo = (req, res, next) => {
     if (req.session.returnTo) {
+        console.log("SESSION: ", req.session.returnTo);
         res.locals.returnTo = req.session.returnTo;
+        console.log('im saving something');
+        console.log(res.locals.returnTo);
+    } else {
+        console.log("hiya");
     }
     next();
 }
@@ -16,18 +21,11 @@ module.exports.isLoggedIn = (req, res, next) => {
     next();
 }
 
-// module.exports.isAuthor = async (req, res, next) => {
-//     const { id } = req.params;
-//     const flashcard = await Flashcard.findById(id);
+module.exports.saveLastURL = (req, res, next) => {
+    req.session.returnTo = req.originalUrl;
+    next();
+}
 
-
-
-//     if (!flashcard.author.equals(req.user._id) && !flashcard.$isValid) {
-//         req.flash('error', 'You dont have permission to do that');
-//         return res.redirect(`/flashcards/${id}`)
-//     }
-//     next();
-// }
 
 module.exports.isAuthor = async (req, res, next) => {
     const { id } = req.params;
