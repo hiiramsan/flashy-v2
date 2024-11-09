@@ -12,10 +12,12 @@ const wrongCard = document.querySelectorAll('#wrong-card');
 const rightCard = document.querySelectorAll('#right-card');
 const continueLabel = document.querySelectorAll('#continue');
 
-
 let currentCard = 0;
 let totalCards = flashcardData.cards.length;
 let gameState = 'onTyping'
+let points = 0;
+
+
 
 window.addEventListener('load', ()=>{
   showQuestion();
@@ -39,7 +41,6 @@ addEventListener('keypress', (event)=>{
     if(gameState === 'onTyping') {
       checkAnswer();
     } else if(gameState === 'onFeedback') {
-      console.log('remove all feedback and put next question')
       nextQuestion();
     }
   }
@@ -63,8 +64,7 @@ function hideFeedbackContainer() {
   feedbacks[currentCard].style.display = 'none' 
 }
 
-function checkAnswer() {
-  console.log('CHECKING ANSWER')
+function checkAnswer(){
   gameState = 'onFeedback';
   let rightChoice = flashcard.cards[currentCard].term
 
@@ -75,13 +75,10 @@ function checkAnswer() {
     } else {
       wrongAnswer(guesserInput[currentCard].value, rightChoice)
     }
-  } else {
-    console.log('got no answwer')
-  }
+  } 
 }
 
 function rightAnswer(right) {
-  console.log('u got it wrright')
   feedbacks[currentCard].classList.toggle('hide');
   hideGuesserContainer();
   showFeedbackContainer();
@@ -89,15 +86,15 @@ function rightAnswer(right) {
   rightCard[currentCard].classList.toggle('hide')
   rightCard[currentCard].textContent = right;
   continueLabel[currentCard].classList.toggle('hide');
+  points++;
 }
 
 function wrongAnswer(wrong, right) {
-  console.log('u got it wrong')
   feedbacks[currentCard].classList.toggle('hide');
   hideGuesserContainer();
   showFeedbackContainer();
 
-  feedbackWrong[currentCard].textContent = "Are ya dumb or what?"
+  feedbackWrong[currentCard].textContent = "Wrong answer!"
   feedbackRight[currentCard].textContent = "Correst answer is:"
   rightCard[currentCard].classList.toggle('hide')
   wrongCard[currentCard].classList.toggle('hide')
@@ -107,24 +104,28 @@ function wrongAnswer(wrong, right) {
 }
 
 function nextQuestion() {
-  gameState = 'onTyping';
-  currentCard++;
-  showQuestion();
-  hideFeedbackContainer();
-  showGuesserContainer();
+  if(currentCard < flashcards.length - 1) {
+    gameState = 'onTyping';
+    currentCard++;
+    hideFeedbackContainer();
+    showGuesserContainer();
+    showQuestion();
+  } else {
+    gameState ='ended'
+    endGame();
+  }
 }
 
+function endGame() {
+  hideFeedbackContainer();
+  flashcards.forEach(fl =>{
+    fl.classList.add('hide');
+  })
 
-
-
-
-
-
-
-
-
-
-
+  document.getElementById('results').style.display = "flex"
+  document.getElementById('points').textContent = `You got ${points} out of ${flashcards.length}`
+ // triggerConfetti();
+}
 
 const starButtons = document.querySelectorAll("#star");
 starButtons.forEach((btn) => {
@@ -154,7 +155,7 @@ starButtons.forEach((btn) => {
           }
         });
       } else {
-        console.log("Error while fetching data", data.message);
+        //error
       }
     } catch (err) {
       console.log(err);

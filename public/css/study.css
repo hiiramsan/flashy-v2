@@ -523,3 +523,15 @@ button#star.starred svg polygon {
   height: 8px;
   margin: 0.5em;
 }
+
+.results {
+  font-family: 'Montserrat';
+  font-size: 1.5em;
+  color: #fff;
+  display: none;
+  flex-direction: column;
+  padding: 4em;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
