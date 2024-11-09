@@ -18,10 +18,13 @@ let totalCards = flashcardData.cards.length;
 let gameState = 'onTyping'
 
 window.addEventListener('load', ()=>{
-    startSession();
+  showQuestion();
 })
 
-const startSession = () => {
+const showQuestion = () => {
+  flashcards.forEach(fl =>{
+    fl.classList.add('hide');
+  })
     flashcards[currentCard].classList.toggle('hide');
     guesserInput.focus();
 }
@@ -40,6 +43,7 @@ addEventListener('keypress', (event)=>{
       checkAnswer();
     } else if(gameState === 'onFeedback') {
       console.log('remove all feedback and put next question')
+      nextQuestion();
     }
   }
 })
@@ -49,12 +53,21 @@ function hideGuesserContainer() {
   label.style.display = 'none'
 }
 
+function showGuesserContainer() {
+  guesserContainer.style.display = 'block' || 'flex';
+  label.style.display = 'block' || 'flex'
+}
+
 function showFeedbackContainer() {
   feedback.style.display = 'block' || 'flex'
 }
 
-function checkAnswer() {
+function hideFeedbackContainer() {
+  feedback.style.display = 'none' 
+}
 
+function checkAnswer() {
+  console.log('CHECKING ANSWER')
   gameState = 'onFeedback';
   let rightChoice = flashcard.cards[currentCard].term
 
@@ -65,6 +78,8 @@ function checkAnswer() {
     } else {
       wrongAnswer(guesserInput.value, rightChoice)
     }
+  } else {
+    console.log('got no answwer')
   }
 }
 
@@ -92,6 +107,13 @@ function wrongAnswer(wrong, right) {
   continueLabel.classList.toggle('hide');
 }
 
+function nextQuestion() {
+  gameState = 'onTyping';
+  currentCard++;
+  showQuestion();
+  hideFeedbackContainer();
+  showGuesserContainer();
+}
 
 
 
