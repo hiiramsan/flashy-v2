@@ -1,16 +1,16 @@
 const flashcards = document.querySelectorAll('.write-container');
 const checkBtn = document.getElementById('btn-check');
-const guesserInput = document.getElementById('guesser-input');
+const guesserInput = document.querySelectorAll('#guesser-input');
 const flashcard = flashcardData;
-const feedback = document.getElementById('feedback');
-const guesserContainer = document.getElementById('guesser-container');
-const label = document.getElementById('label');
-const feedbackCard = document.getElementById('feedback-card')
-const feedbackWrong = document.getElementById('feedback-wrong');
-const feedbackRight = document.getElementById('feedback-right');
-const wrongCard = document.getElementById('wrong-card');
-const rightCard = document.getElementById('right-card');
-const continueLabel = document.getElementById('continue');
+const feedbacks = document.querySelectorAll('#feedback');
+const guesserContainers = document.querySelectorAll('#guesser-container');
+const labels = document.querySelectorAll('#label');
+const feedbackCard = document.querySelectorAll('#feedback-card')
+const feedbackWrong = document.querySelectorAll('#feedback-wrong');
+const feedbackRight = document.querySelectorAll('#feedback-right');
+const wrongCard = document.querySelectorAll('#wrong-card');
+const rightCard = document.querySelectorAll('#right-card');
+const continueLabel = document.querySelectorAll('#continue');
 
 
 let currentCard = 0;
@@ -25,12 +25,9 @@ const showQuestion = () => {
   flashcards.forEach(fl =>{
     fl.classList.add('hide');
   })
-    flashcards[currentCard].classList.toggle('hide');
-    guesserInput.focus();
-}
 
-const nextCard = () => {
-  guesserInput.focus();
+    flashcards[currentCard].classList.toggle('hide');
+    guesserContainers[currentCard].children[0].focus();
 }
 
 checkBtn.addEventListener('click', ()=> {
@@ -49,21 +46,21 @@ addEventListener('keypress', (event)=>{
 })
 
 function hideGuesserContainer() {
-  guesserContainer.style.display = 'none';
-  label.style.display = 'none'
+  guesserContainers[currentCard].style.display = 'none';
+  labels[currentCard].style.display = 'none'
 }
 
 function showGuesserContainer() {
-  guesserContainer.style.display = 'block' || 'flex';
-  label.style.display = 'block' || 'flex'
+  guesserContainers[currentCard].style.display = 'block' || 'flex';
+  labels[currentCard].style.display = 'block' || 'flex'
 }
 
 function showFeedbackContainer() {
-  feedback.style.display = 'block' || 'flex'
+  feedbacks[currentCard].style.display = 'block' || 'flex'
 }
 
 function hideFeedbackContainer() {
-  feedback.style.display = 'none' 
+  feedbacks[currentCard].style.display = 'none' 
 }
 
 function checkAnswer() {
@@ -71,12 +68,12 @@ function checkAnswer() {
   gameState = 'onFeedback';
   let rightChoice = flashcard.cards[currentCard].term
 
-  if(guesserInput.value) {
-    guesserContainer.classList.toggle('hide');
-    if(guesserInput.value === rightChoice) {
+  if(guesserInput[currentCard].value) {
+    guesserContainers[currentCard].classList.toggle('hide');
+    if(guesserInput[currentCard].value === rightChoice) {
       rightAnswer(rightChoice);
     } else {
-      wrongAnswer(guesserInput.value, rightChoice)
+      wrongAnswer(guesserInput[currentCard].value, rightChoice)
     }
   } else {
     console.log('got no answwer')
@@ -84,27 +81,29 @@ function checkAnswer() {
 }
 
 function rightAnswer(right) {
-  feedback.classList.toggle('hide');
+  console.log('u got it wrright')
+  feedbacks[currentCard].classList.toggle('hide');
   hideGuesserContainer();
   showFeedbackContainer();
-  feedbackRight.textContent = "You got it right!"
-  rightCard.classList.toggle('hide')
-  rightCard.textContent = right;
-  continueLabel.classList.toggle('hide');
+  feedbackRight[currentCard].textContent = "You got it right!"
+  rightCard[currentCard].classList.toggle('hide')
+  rightCard[currentCard].textContent = right;
+  continueLabel[currentCard].classList.toggle('hide');
 }
 
 function wrongAnswer(wrong, right) {
-  feedback.classList.toggle('hide');
+  console.log('u got it wrong')
+  feedbacks[currentCard].classList.toggle('hide');
   hideGuesserContainer();
   showFeedbackContainer();
 
-  feedbackWrong.textContent = "Are ya dumb or what?"
-  feedbackRight.textContent = "Correst answer is:"
-  rightCard.classList.toggle('hide')
-  wrongCard.classList.toggle('hide')
-  wrongCard.textContent = wrong;
-  rightCard.textContent = right;
-  continueLabel.classList.toggle('hide');
+  feedbackWrong[currentCard].textContent = "Are ya dumb or what?"
+  feedbackRight[currentCard].textContent = "Correst answer is:"
+  rightCard[currentCard].classList.toggle('hide')
+  wrongCard[currentCard].classList.toggle('hide')
+  wrongCard[currentCard].textContent = wrong;
+  rightCard[currentCard].textContent = right;
+  continueLabel[currentCard].classList.toggle('hide');
 }
 
 function nextQuestion() {

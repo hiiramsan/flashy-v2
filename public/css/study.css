@@ -463,13 +463,15 @@ button#star.starred svg polygon {
 }
 
 .guesser-container button {
-  width: 18%;
+  width: 16%;
   border-radius: 10px;
   background-color: #fff;
   color: #000;
   font-family: 'Montserrat', sans-serif;
   font-size: 1em;
+  padding: 1em;
   font-weight: 500;
+  margin-left: 10px;
   transition: 0.3s ease;
   border: none;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); 
