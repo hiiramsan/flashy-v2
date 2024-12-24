@@ -3,7 +3,6 @@ const express = require('express');
 const path = require('path');
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
-const mongoose = require('mongoose');
 const flashcardsRoutes = require('./routes/flashcards');
 const usersRoutes = require('./routes/users');
 const cardsRoutes = require('./routes/cards');
@@ -13,9 +12,10 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const LocalStrategy = require('passport-local')
 const User = require('./models/users');
-
+const mongoose = require('mongoose')
+  
 // connection to database
-mongoose.connect('mongodb://127.0.0.1:27017/flashy-demo')
+mongoose.connect('mongodb+srv://carlos:jvqK7bc7yTyjDqhl@cluster0.okz7s.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
   .then(() => {
     console.log('Connected to MongoDB');
   })
@@ -25,7 +25,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/flashy-demo')
 
 const app = express();
 
-// settings
+// settings-----------
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -67,8 +67,6 @@ app.get('/', (req, res) => {
   res.render('home')
 });
 
-
-//routers
 app.use("/flashcards", flashcardsRoutes);
 app.use("/", usersRoutes);
 app.use("/", cardsRoutes)

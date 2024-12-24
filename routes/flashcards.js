@@ -21,7 +21,8 @@ router.route('/:id')
 
 router.get("/:id/edit",isLoggedIn, isAuthor, flashcards.renderEditForm);
 router.get("/:id/study", saveLastURL, isLoggedIn, flashcards.renderStudy);
-router.get("/:id/writing", saveLastURL, /* isLoggedIn,  */flashcards.renderWriting); 
+router.get("/:id/writing", saveLastURL, isLoggedIn,flashcards.renderWriting); 
 router.post("/:id/config", storeReturnTo, isLoggedIn, isAuthor, catchAsync(flashcards.updateConfig));
+router.get("/:id/test", saveLastURL, isLoggedIn, flashcards.renderTest);
 
 module.exports = router;

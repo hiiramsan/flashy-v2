@@ -124,7 +124,6 @@ function endGame() {
 
   document.getElementById('results').style.display = "flex"
   document.getElementById('points').textContent = `You got ${points} out of ${flashcards.length}`
- // triggerConfetti();
 }
 
 const starButtons = document.querySelectorAll("#star");

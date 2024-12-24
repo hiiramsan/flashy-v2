@@ -230,3 +230,21 @@ module.exports.renderWriting = async(req, res) => {
     console.log(error);
   }
 };
+
+module.exports.renderTest = async(req, res) => {
+  try {
+    const {id} = req.params;
+    const flashcard = await Flashcard.findById(id).populate("cards");
+    if(!flashcard) {
+      req.flash('error', "Flashcard set not found!")
+      return res.redirect('/flashcards');
+    }
+
+    res.render("flashcards/test", {flashcard, mode: '🧠 Test'})
+
+  } catch(error) {
+    console.log("error while rendering test mdoe");
+    console.log(error);
+
+  }
+}
