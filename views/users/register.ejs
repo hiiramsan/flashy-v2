@@ -36,6 +36,11 @@
                     or
                     <div class="divider-line"></div>
                 </div> -->
+                <% if (error && error.length > 0) { %>
+                    <div class="error-container">
+                      <div class="alert alert-danger"><%= error %> 😢</div>
+                    </div>
+                  <% } %>
                 <div class="text-field">
                     <label for="username">Username</label>
                     <input 
