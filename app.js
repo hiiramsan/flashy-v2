@@ -13,9 +13,12 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local')
 const User = require('./models/users');
 const mongoose = require('mongoose')
+const MongoStore = require('connect-mongo');
   
+const dbUrl = 'mongodb+srv://carlos:jvqK7bc7yTyjDqhl@cluster0.okz7s.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+
 // connection to database
-mongoose.connect('mongodb+srv://carlos:jvqK7bc7yTyjDqhl@cluster0.okz7s.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+mongoose.connect(dbUrl)
   .then(() => {
     console.log('Connected to MongoDB');
   })
@@ -33,17 +36,25 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, "public")));
 
+
+
 const sessionConfig = {
+  store: MongoStore.create({
+    mongoUrl: dbUrl,
+    touchAfter: 24 * 3600
+  }),
   name: 'flashySession',
   secret: 'thisshouldbeabettersecret',
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   cookie: {
     httpOnly: true,
     expires: Date.now() + (1000 * 60 * 60 * 24 * 7),
     maxAge: (1000 * 60 * 60 * 24 * 7)
   }
-}
+};
+
+app.use(session(sessionConfig));
 
 //auth settings
 app.use(session(sessionConfig))
@@ -62,6 +73,8 @@ app.use((req, res, next) => {
   res.locals.info = req.flash('info');
   next();
 });
+
+app.set('trust proxy', 1); // trust first proxy
 
 app.get('/', (req, res) => {
   res.render('home')
