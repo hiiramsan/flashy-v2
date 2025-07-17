@@ -55,7 +55,7 @@ section#create-set {
   }
   
   section#create-set ::placeholder {
-    color: var(--dark-gray);
+    color: var(--secondary-opt-2);
   }
   
   section#create-set > .field {
